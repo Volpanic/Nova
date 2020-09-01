@@ -1,43 +1,16 @@
 fileFormatVersion: 2
-guid: 831d5e3c9b5ac7c48b79617b7913e6fb
+guid: ba7036a20efa5ac4584ed37fc08e067a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3807074074450212858
-    second: spr_player_0
+      213: -8733316865280011322
+    second: floorDust_0
   - first:
-      213: -8203452639265080120
-    second: spr_player_1
+      213: 6458291818506002135
+    second: floorDust_1
   - first:
-      213: -140379212836063997
-    second: spr_player_2
-  - first:
-      213: -3984481398762461954
-    second: spr_player_3
-  - first:
-      213: -6449942465968428341
-    second: spr_player_0
-  - first:
-      213: 2416773667141121472
-    second: spr_player_1
-  - first:
-      213: 6026181788391946261
-    second: spr_player_2
-  - first:
-      213: 2667389265057056838
-    second: spr_player_3
-  - first:
-      213: -3643024057642862784
-    second: spr_player_4
-  - first:
-      213: 5266870713966031480
-    second: spr_player_5
-  - first:
-      213: -9082026124242352409
-    second: spr_player_4
-  - first:
-      213: 3213820733242789879
-    second: spr_player_5
+      213: 3842809326616960334
+    second: floorDust_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,8 +52,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -171,127 +144,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_player_0
+      name: floorDust_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcaae3e10833d76a0800000000000000
-      internalID: -6449942465968428341
+      spriteID: 6c39e0605960dc680800000000000000
+      internalID: -8733316865280011322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_player_1
+      name: floorDust_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 7
         y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c5f67c78da1a8120800000000000000
-      internalID: 2416773667141121472
+      spriteID: 7de9cd1013670a950800000000000000
+      internalID: 6458291818506002135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_player_2
+      name: floorDust_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 14
         y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518b701986c41a350800000000000000
-      internalID: 6026181788391946261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_player_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6488a657768740520800000000000000
-      internalID: 2667389265057056838
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_player_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e687bfcb5926f180800000000000000
-      internalID: -9082026124242352409
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_player_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ffc8b8ede8c99c20800000000000000
-      internalID: 3213820733242789879
+      spriteID: e4ddf84f8b6645530800000000000000
+      internalID: 3842809326616960334
       vertices: []
       indices: 
       edges: []
@@ -299,15 +209,13 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cb1baf35930e8fa4b92b1e3c8ab8062a
+    spriteID: a0ef1af1e6457864fa3f6551034f1b1d
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 989ede402f14f8444a3c6b0affeb1308, type: 3}
-      name: _Emission
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
