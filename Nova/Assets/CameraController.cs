@@ -6,12 +6,12 @@ public class CameraController : MonoBehaviour
 {
     public GameObject toFollow;
     private bool hasRigidBody = false;
-    private Rigidbody2D followBody;
+    private Entity2D followBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        followBody = gameObject.GetComponent<Rigidbody2D>();
+        followBody = gameObject.GetComponent<Entity2D>();
         if(followBody != null)
         {
             hasRigidBody = true;
@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
 
         if (hasRigidBody)
         {
-            target = new Vector3(toFollow.transform.position.x + (followBody.velocity.x * 4.0f),
-                toFollow.transform.position.y + (followBody.velocity.y * 4.0f),
+            target = new Vector3(toFollow.transform.position.x + (followBody.Velocity.x),
+                toFollow.transform.position.y + (followBody.Velocity.y),
                 transform.position.z);
         }
         else

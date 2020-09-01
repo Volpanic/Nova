@@ -20,25 +20,26 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sRenderer;
     private Animator animator;
 
-    private Vector2 Velocity = Vector2.zero;
-    private Vector2 overFlowVelocity = Vector2.zero;
-
     //Input
     bool KeyRight = false;
     bool KeyLeft = false;
     bool KeyJump = false;
+    bool KeyJumpHeld = false;
     bool KeyJumpRel = false;
+
+    //
+    bool isJumping = false;
 
     //Game Feel Things
     private int coyoteTimer = 0;            //Allows a few frames after the leaves the ground to jump
     private int coyoteTimeThreshhold = 6;
     private int jumpBufferTimer = 0;
     private int jumpBufferThreshhold = 6;   //Allows a few frames before landing to que up a jump on land
+    private float halfGravBuffer = 0.5f;
 
     private bool OnGround()
     {
-        return Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, -PIXEL_SCALE),groundLayer);
-        //return Physics2D.OverlapArea(bCollider.bounds.min + new Vector3(PIXEL_SCALE, -PIXEL_SCALE, 0), bCollider.bounds.max + new Vector3(-PIXEL_SCALE, -PIXEL_SCALE, 0), groundLayer);
+        return Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, -1 * PIXEL_SCALE), groundLayer);
     }
 
     // Start is called before the first frame update
@@ -60,7 +61,8 @@ public class PlayerController : MonoBehaviour
         KeyRight = (Input.GetAxisRaw("Horizontal") > 0.25f);
         KeyLeft = (Input.GetAxisRaw("Horizontal") < -0.25f);
         if(!KeyJump) KeyJump = (Input.GetButtonDown("Jump"));
-        KeyJumpRel = (Input.GetButtonUp("Jump"));
+        if(!KeyJumpHeld) KeyJumpHeld = (Input.GetButton("Jump"));
+        if(!KeyJumpRel) KeyJumpRel = (Input.GetButtonUp("Jump"));
     }
 
     // Update is called once per frame
@@ -70,11 +72,7 @@ public class PlayerController : MonoBehaviour
         float fricc = groundFriction;
         if (!onGround) fricc = airFirction;
 
-        //Gravity
-        if (Velocity.y > -10)
-        {
-            entity.Velocity = new Vector2(entity.Velocity.x, entity.Velocity.y - 0.2f);
-        }
+        float grav = 0.2f;
 
         //Mvoement
         if (KeyRight)
@@ -94,7 +92,8 @@ public class PlayerController : MonoBehaviour
         {
             //Set this so it can count down when not on ground
             coyoteTimer = coyoteTimeThreshhold;
-            
+            isJumping = false;
+
             if (KeyJump || jumpBufferTimer > 0)
             {
                 Jump();
@@ -115,19 +114,40 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            if(KeyJumpHeld && Mathf.Abs(entity.Velocity.y) <= halfGravBuffer)
+            {
+                grav *= 0.5f;
+            }
+
+            //Variable jump height
+            if(isJumping && KeyJumpRel)
+            {
+                if(entity.Velocity.y > 0)
+                {
+                    if(entity.Velocity.y >= JumpSpeed/4.0f)
+                    {
+                        entity.Velocity = new Vector2(entity.Velocity.x,JumpSpeed / 4.0f);
+                    }
+                }
+                isJumping = false;
+            }
+
             coyoteTimer = Numbers.Approach(coyoteTimer,0,1);
         }
         jumpBufferTimer = Numbers.Approach(jumpBufferTimer, 0, 1);
 
-        if (entity.Velocity.x != 0)
+        //Gravity
+        if (entity.Velocity.y > -10)
         {
-            sRenderer.flipX = (Mathf.Sign(entity.Velocity.x) == -1)? true : false;
+            entity.Velocity = new Vector2(entity.Velocity.x, entity.Velocity.y - grav);
         }
 
         //Debug.Log(entity.Velocity.ToString() + " : " + overFlowVelocity.ToString()); ;
 
         Animation();
         KeyJump = false;
+        KeyJumpHeld = false;
+        KeyJumpRel = false;
     }
 
     public void Jump()
@@ -135,11 +155,17 @@ public class PlayerController : MonoBehaviour
         entity.Velocity = new Vector2(entity.Velocity.x, JumpSpeed);
         coyoteTimer = 0;
         jumpBufferTimer = 0;
+        isJumping = true;
     }
 
     public void Animation()
     {
-        if(OnGround())
+        if (entity.Velocity.x != 0)
+        {
+            sRenderer.flipX = (Mathf.Sign(entity.Velocity.x) == -1) ? true : false;
+        }
+
+        if (OnGround())
         {
             if(entity.Velocity.x != 0)
             {
