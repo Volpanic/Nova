@@ -50,19 +50,19 @@ namespace Assets.Scripts
 
         public static float Right(Collider2D collider)
         {
-            return collider.bounds.max.x - PIXEL_UNIT;
+            return collider.bounds.max.x ;
         }
         public static float Left(Collider2D collider)
         {
-            return collider.bounds.min.x + PIXEL_UNIT;
+            return collider.bounds.min.x ;
         }
         public static float Top(Collider2D collider)
         {
-            return collider.bounds.max.y - PIXEL_UNIT;
+            return collider.bounds.max.y ;
         }
         public static float Bottom(Collider2D collider)
         {
-            return collider.bounds.min.y + PIXEL_UNIT;
+            return collider.bounds.min.y ;
         }
     }
 }

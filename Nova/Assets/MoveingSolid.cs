@@ -75,7 +75,7 @@ public class MoveingSolid : MonoBehaviour
                 transform.position += new Vector3(moveX, 0, 0);
                 Physics2D.SyncTransforms();
 
-                if (moveX > 0)
+                if (moveX > Physics2DExtra.PIXEL_UNIT)
                 {
                     foreach(Entity2D ent in AllEntities)
                     {
@@ -89,7 +89,7 @@ public class MoveingSolid : MonoBehaviour
                         }
                     }
                 }
-                else 
+                else if(moveX < -Physics2DExtra.PIXEL_UNIT)
                 {
                     foreach(Entity2D ent in AllEntities)
                     {
