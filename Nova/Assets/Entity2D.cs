@@ -31,7 +31,63 @@ public class Entity2D : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Collision();
+        MoveX(velocity.x);
+        MoveY(velocity.y);
+        //Collision();
+    }
+
+    public void MoveX(float amount) // IN UNITS
+    {
+        subPixelVelocity.x += amount;
+        float move = Mathf.Round(subPixelVelocity.x * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
+
+        if(move != 0)
+        {
+            subPixelVelocity.x -= move;
+            float sign = Mathf.Sign(move * PIXEL_SIZE) / PIXEL_SIZE;
+
+            while(move != 0)
+            {
+                if (!Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(sign, 0), groundLayer))
+                {
+                    transform.position += new Vector3(sign, 0, 0);
+                    move -= sign;
+                }
+                else
+                {
+                    velocity.x = 0;
+                    subPixelVelocity.x = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void MoveY(float amount) // IN UNITS, NOT GOING TO CONFUSE ME AT ALL I SWEAR
+    {
+        subPixelVelocity.y += amount;
+        float move = Mathf.Round(subPixelVelocity.y * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
+
+        if (move != 0)
+        {
+            subPixelVelocity.y -= move;
+            float sign = Mathf.Sign(move * PIXEL_SIZE) / PIXEL_SIZE;
+
+            while (move != 0)
+            {
+                if (!Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, sign), groundLayer))
+                {
+                    transform.position += new Vector3(0, sign, 0);
+                    move -= sign;
+                }
+                else
+                {
+                    velocity.y = 0;
+                    subPixelVelocity.y = 0;
+                    break;
+                }
+            }
+        }
     }
 
     public void Collision()
