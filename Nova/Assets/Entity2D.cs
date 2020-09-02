@@ -7,7 +7,8 @@ public class Entity2D : MonoBehaviour
 {
     const float PIXEL_SIZE = 16.0f;
 
-    private BoxCollider2D bCollider;
+    [HideInInspector]
+    public BoxCollider2D bCollider;
 
     [HideInInspector]
     public Vector2 Velocity // So it's in pixels, Will definetly not end up confusing i swear
@@ -36,6 +37,12 @@ public class Entity2D : MonoBehaviour
         //Collision();
     }
 
+    public bool IsRiding(ref Collider2D collider)
+    {
+        return Physics2DExtra.PlaceMeeting(bCollider, new Vector2(0, -1 * Physics2DExtra.PIXEL_UNIT), groundLayer, collider);
+    }
+
+
     public void MoveX(float amount) // IN UNITS
     {
         subPixelVelocity.x += amount;
@@ -51,6 +58,7 @@ public class Entity2D : MonoBehaviour
                 if (!Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(sign, 0), groundLayer))
                 {
                     transform.position += new Vector3(sign, 0, 0);
+                    Physics2D.SyncTransforms();
                     move -= sign;
                 }
                 else
@@ -61,6 +69,7 @@ public class Entity2D : MonoBehaviour
                 }
             }
         }
+        Physics2D.SyncTransforms();
     }
 
     public void MoveY(float amount) // IN UNITS, NOT GOING TO CONFUSE ME AT ALL I SWEAR
@@ -78,6 +87,7 @@ public class Entity2D : MonoBehaviour
                 if (!Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, sign), groundLayer))
                 {
                     transform.position += new Vector3(0, sign, 0);
+                    Physics2D.SyncTransforms();
                     move -= sign;
                 }
                 else
@@ -88,6 +98,7 @@ public class Entity2D : MonoBehaviour
                 }
             }
         }
+        Physics2D.SyncTransforms();
     }
 
     public void Collision()
