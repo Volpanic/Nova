@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EntityFollowAlongPath : MonoBehaviour
 {
 
@@ -17,7 +18,8 @@ public class EntityFollowAlongPath : MonoBehaviour
     public bool rotateWith = false;
     public PathType pathType = PathType.Closed;
 
-    public List<Vector2> pointPositions = new List<Vector2>();
+    
+    public List<Vector2> pointPositions;
 
     int listIndex = 0;
     int listDir = 1;
@@ -29,9 +31,6 @@ public class EntityFollowAlongPath : MonoBehaviour
     void Start()
     {
         entitiy = GetComponent<Entity2D>();
-
-        pointPositions[0] = transform.position;
-
 
         if (entitiy == null)
         {
