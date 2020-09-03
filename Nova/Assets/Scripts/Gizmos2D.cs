@@ -35,5 +35,23 @@ namespace Assets.Scripts
             }
         }
 
+        public static void DrawCollider(Collider2D gCollider)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos2D.DrawCircle(new Vector2(Physics2DExtra.Left(gCollider), Physics2DExtra.Top(gCollider)), 0.1f);
+
+            Gizmos.color = Color.red;
+            Gizmos2D.DrawCircle(new Vector2(Physics2DExtra.Right(gCollider), Physics2DExtra.Top(gCollider)), 0.1f);
+
+            Gizmos.color = Color.green;
+            Gizmos2D.DrawCircle(new Vector2(Physics2DExtra.Left(gCollider), Physics2DExtra.Bottom(gCollider)), 0.1f);
+
+            Gizmos.color = Color.yellow;
+            Gizmos2D.DrawCircle(new Vector2(Physics2DExtra.Right(gCollider), Physics2DExtra.Bottom(gCollider)), 0.1f);
+
+            Gizmos.color = Color.cyan;
+            Gizmos2D.DrawRectangle(new Vector2(Physics2DExtra.Left(gCollider), Physics2DExtra.Top(gCollider)), new Vector2(Physics2DExtra.Right(gCollider), Physics2DExtra.Bottom(gCollider)));
+        }
+
     }
 }

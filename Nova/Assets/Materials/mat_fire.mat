@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_player_glow
+  m_Name: mat_fire
   m_Shader: {fileID: -6465566751694194690, guid: a73365c71c95d4c4aaef715e6315184d,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA

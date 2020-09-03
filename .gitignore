@@ -58,7 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-Nova/Library/
-Nova/Packages/
 Nova/Temp/
 Nova/Builds/
+Nova/Library/

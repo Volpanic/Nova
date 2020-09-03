@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     //
     bool isJumping = false;
 
+    private bool recentlyHurt = false;
+    private int hurtTimer = 0;
+
     //Game Feel Things
     private int coyoteTimer = 0;            //Allows a few frames after the leaves the ground to jump
     private int coyoteTimeThreshhold = 6;
@@ -51,9 +54,13 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void OnDrawGizmos()
+    public void Hurt()
     {
-
+        if(!recentlyHurt)
+        {
+            recentlyHurt = true;
+            hurtTimer = 90;
+        }
     }
 
     private void Update()
@@ -143,6 +150,26 @@ public class PlayerController : MonoBehaviour
         }
 
         //Debug.Log(entity.Velocity.ToString() + " : " + overFlowVelocity.ToString()); ;
+
+        if(recentlyHurt)
+        {
+            hurtTimer -= 1;
+
+            if(hurtTimer % 5 == 0)
+            {
+                sRenderer.enabled = true;
+            }
+            else
+            {
+                sRenderer.enabled = false;
+            }
+
+            if (hurtTimer <= 0)
+            {
+                sRenderer.enabled = true;
+                recentlyHurt = false;
+            }
+        }
 
         Animation();
         KeyJump = false;
