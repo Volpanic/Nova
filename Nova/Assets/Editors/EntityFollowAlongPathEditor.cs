@@ -92,7 +92,7 @@ public class EntityFollowAlongPathEditor : Editor
             
             if(i != entityPath.pointPositions.Count-1)
             {
-                Handles.DrawDottedLine(entityPath.pointPositions[i], entityPath.pointPositions[i+1],8);   
+                Handles.DrawDottedLine(entityPath.pointPositions[i], entityPath.pointPositions[i+1],8);
             }
             else if(i > 0)
             {
