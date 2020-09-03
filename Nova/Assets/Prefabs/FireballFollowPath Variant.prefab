@@ -16,7 +16,7 @@ MonoBehaviour:
   pathType: 0
   pointPositions:
   - {x: -4, y: 1}
-  speed: 3
+  speed: 1
 --- !u!1001 &1172196261368647963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 8549962599883977211, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}
       propertyPath: m_Name
-      value: FireballFollowPath
+      value: FireballFollowPath Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8549962599883977214, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}

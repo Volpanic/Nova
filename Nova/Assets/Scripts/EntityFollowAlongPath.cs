@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,8 @@ public class EntityFollowAlongPath : MonoBehaviour
         {
             Debug.LogWarning("Object : " + gameObject.name + " needs and Entity2D to use EntityFollowAlongPath.");
         }
+
+        speed = speed * Physics2DExtra.PIXEL_UNIT;
     }
 
     // Update is called once per frame
@@ -80,20 +83,21 @@ public class EntityFollowAlongPath : MonoBehaviour
             }
         }
 
-        if (dist <= speed)
-        {
-            Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position);
-            entitiy.Velocity = movement;
-            Debug.Log("Dist  " + dist.ToString() + " Mag  : " + movement.magnitude.ToString());
+        //if (dist <= speed)
+        //{
+        //    Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position);
 
-        }
-        else
-        {
-            Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position).normalized * speed;
-            entitiy.Velocity = movement;
-        }
+        //    entitiy.Velocity = Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex],speed) - (Vector2)transform.position;
+        //}
+        //else
+        //{
+        //    Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position).normalized * speed;
+        //    entitiy.Velocity = movement;
+        //}
 
-        if(rotateWith)
+        entitiy.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+
+        if (rotateWith)
         {
             transform.eulerAngles = Vector3.forward * (Mathf.Atan2(entitiy.Velocity.y,entitiy.Velocity.x) * Mathf.Rad2Deg);
         }

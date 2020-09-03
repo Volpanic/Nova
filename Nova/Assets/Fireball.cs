@@ -9,7 +9,7 @@ public class Fireball : MonoBehaviour
 
     public Vector2 dirVec = Vector2.right;
     public float Speed = 1;
-    public ParticleSystem particleSystem;
+    public ParticleSystem pSystem = null;
 
 
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class Fireball : MonoBehaviour
     void FixedUpdate()
     {
         //entity.Velocity = dirVec * Speed;
-        if(particleSystem != null)
+        if(pSystem != null)
         {
             //Emit fire particle
             if (Random.Range(0, 20) >= 10)
@@ -34,7 +34,7 @@ public class Fireball : MonoBehaviour
                 ep.velocity = new Vector3(ep.velocity.x,Random.Range(-(Mathf.PI/8.0f), (Mathf.PI / 8.0f)),ep.velocity.z);
 
                 //Particle emit
-                particleSystem.Emit(ep, Mathf.FloorToInt(entity.Velocity.magnitude));
+                pSystem.Emit(ep, Mathf.FloorToInt(entity.Velocity.magnitude));
             }
         }
 

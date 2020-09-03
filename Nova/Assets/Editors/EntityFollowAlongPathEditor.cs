@@ -13,6 +13,8 @@ public class EntityFollowAlongPathEditor : Editor
     EntityFollowAlongPath entityPath;
     GUIStyle uiStyle = new GUIStyle();
 
+    public int selectedNode = 0;
+
     private void OnEnable()
     {
         entityPath = target as EntityFollowAlongPath;

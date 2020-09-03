@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
 
         if (hasRigidBody)
         {
-            target = new Vector3(toFollow.transform.position.x + (followBody.Velocity.x),
-                toFollow.transform.position.y + (followBody.Velocity.y),
+            target = new Vector3(toFollow.transform.position.x + (followBody.Velocity.x * 5.0f),
+                toFollow.transform.position.y + (followBody.Velocity.y * 5.0f),
                 transform.position.z);
         }
         else
