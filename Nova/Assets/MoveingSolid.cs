@@ -29,7 +29,7 @@ public class MoveingSolid : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Velocity = new Vector2((Mathf.Sin(SinTimer / 10.0f)) * 4,Velocity.y);
+        Velocity = new Vector2((Mathf.Sin(SinTimer / 10.0f)) * 4,Velocity.y);
         //Velocity = new Vector2(Velocity.x, (Mathf.Cos(SinTimer / 10.0f)) * 4);
 
         Move(velocity.x,velocity.y);
@@ -81,7 +81,7 @@ public class MoveingSolid : MonoBehaviour
                     {
                         if (Physics2DExtra.PlaceMeeting(gCollider, Vector2.zero, entitiyLayer, ent.bCollider,true))
                         {
-                            ent.MoveX(Physics2DExtra.Right(gCollider) - Physics2DExtra.Left(ent.bCollider) + Physics2DExtra.PIXEL_UNIT);
+                            ent.MoveX(Physics2DExtra.Right(gCollider) - Physics2DExtra.Left(ent.bCollider));
                         }
                         else if(riding.Contains(ent))
                         {
@@ -95,7 +95,7 @@ public class MoveingSolid : MonoBehaviour
                     {
                         if (Physics2DExtra.PlaceMeeting(gCollider, Vector2.zero, entitiyLayer, ent.bCollider,true))
                         {
-                            ent.MoveX(Physics2DExtra.Left(gCollider)  - Physics2DExtra.Right(ent.bCollider) - Physics2DExtra.PIXEL_UNIT);
+                            ent.MoveX(Physics2DExtra.Left(gCollider)  - Physics2DExtra.Right(ent.bCollider));
                         }
                         else if(riding.Contains(ent))
                         {
@@ -119,7 +119,7 @@ public class MoveingSolid : MonoBehaviour
                     {
                         if (Physics2DExtra.PlaceMeeting(gCollider, Vector2.zero, entitiyLayer, ent.bCollider,true))
                         {
-                            ent.MoveY(Physics2DExtra.Top(gCollider) - Physics2DExtra.Bottom(ent.bCollider) + Physics2DExtra.PIXEL_UNIT);
+                            ent.MoveY(Physics2DExtra.Top(gCollider) - Physics2DExtra.Bottom(ent.bCollider));
                         }
                         else if (riding.Contains(ent))
                         {
@@ -133,7 +133,7 @@ public class MoveingSolid : MonoBehaviour
                     {
                         if (Physics2DExtra.PlaceMeeting(gCollider, Vector2.zero, entitiyLayer, ent.bCollider,true))
                         {
-                            ent.MoveY(Physics2DExtra.Bottom(gCollider) - Physics2DExtra.Top(ent.bCollider) - Physics2DExtra.PIXEL_UNIT);
+                            ent.MoveY(Physics2DExtra.Bottom(gCollider) - Physics2DExtra.Top(ent.bCollider));
                         }
                         else if (riding.Contains(ent))
                         {

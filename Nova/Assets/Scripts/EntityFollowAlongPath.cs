@@ -47,8 +47,8 @@ public class EntityFollowAlongPath : MonoBehaviour
         }
 
         float dist = Vector2.Distance(transform.position, pointPositions[listIndex]);
-        Debug.Log("Dist  " + dist.ToString()); ;
-        if(dist <= Assets.Scripts.Physics2DExtra.PIXEL_UNIT*speed)
+        
+        if(dist == 0)
         {
             listIndex += listDir;
 
@@ -84,6 +84,7 @@ public class EntityFollowAlongPath : MonoBehaviour
         {
             Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position);
             entitiy.Velocity = movement;
+            Debug.Log("Dist  " + dist.ToString() + " Mag  : " + movement.magnitude.ToString());
 
         }
         else
