@@ -32,8 +32,31 @@ public class Entity2D : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveX(velocity.x);
-        MoveY(velocity.y);
+        if (doCollisions)
+        {
+            MoveX(velocity.x);
+            MoveY(velocity.y);
+        }
+        else
+        {
+            subPixelVelocity.x += velocity.x;
+            float move = Mathf.Round(subPixelVelocity.x * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
+
+            if (move != 0)
+            {
+                subPixelVelocity.x -= move;
+                transform.position += new Vector3(move, 0, 0);
+            }
+            
+            subPixelVelocity.y += velocity.y;
+            move = Mathf.Round(subPixelVelocity.y * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
+
+            if (move != 0)
+            {
+                subPixelVelocity.y -= move;
+                transform.position += new Vector3(0, move, 0);
+            }
+        }
         //Collision();
     }
 

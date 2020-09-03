@@ -29,7 +29,7 @@ public class MoveingSolid : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Velocity = new Vector2((Mathf.Sin(SinTimer / 10.0f)) * 4,Velocity.y);
+        //Velocity = new Vector2((Mathf.Sin(SinTimer / 10.0f)) * 4,Velocity.y);
         //Velocity = new Vector2(Velocity.x, (Mathf.Cos(SinTimer / 10.0f)) * 4);
 
         Move(velocity.x,velocity.y);

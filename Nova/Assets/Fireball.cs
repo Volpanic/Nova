@@ -10,6 +10,7 @@ public class Fireball : MonoBehaviour
     public Vector2 dirVec = Vector2.right;
     public float Speed = 1;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class Fireball : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        entity.Velocity = dirVec * Speed;
+        //entity.Velocity = dirVec * Speed;
 
     }
 
