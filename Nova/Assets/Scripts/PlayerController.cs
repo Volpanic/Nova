@@ -13,11 +13,14 @@ public class PlayerController : MonoBehaviour
     public float groundFriction = 0.5f;
     public float airFirction = 0.33f;
 
+    public GameObject burnJumpParticle;
+
     public LayerMask groundLayer;
 
     private Entity2D entity;
     private BoxCollider2D bCollider;
     private SpriteRenderer sRenderer;
+    private ParticleSystem dustSystem;
     private Animator animator;
 
     //Input
@@ -41,11 +44,6 @@ public class PlayerController : MonoBehaviour
     private int jumpBufferThreshhold = 6;   //Allows a few frames before landing to que up a jump on land
     private float halfGravBuffer = 0.5f;
 
-    private bool OnGround()
-    {
-        return Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, -1 * PIXEL_SCALE), groundLayer);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +51,7 @@ public class PlayerController : MonoBehaviour
         entity = GetComponent<Entity2D>();
         bCollider = GetComponent<BoxCollider2D>();
         sRenderer = GetComponent<SpriteRenderer>();
+        dustSystem = GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
 
         //Setup Input
@@ -64,13 +63,12 @@ public class PlayerController : MonoBehaviour
         controls.InGame.Left.canceled += Left_canceled;
 
         controls.InGame.Jump.started += Jump_started;
-        controls.InGame.Jump.canceled += Jump_canceled; ;
+        controls.InGame.Jump.canceled += Jump_canceled;
     }
 
     private void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         KeyJumpHeld = false;
-        KeyJump = false;
         KeyJumpRel = true;
     }
 
@@ -78,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         KeyJumpHeld = true;
         KeyJump = true;
+        KeyJumpRel = false;
     }
 
     private void Right_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyRight = true;}
@@ -106,9 +105,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool onGround = OnGround();
         float fricc = groundFriction;
-        if (!onGround) fricc = airFirction;
+        if (!entity.onGround) fricc = airFirction;
 
         float grav = 0.2f;
 
@@ -126,7 +124,27 @@ public class PlayerController : MonoBehaviour
             entity.Velocity = new Vector2(Numbers.Approach(entity.Velocity.x, 0.0f, fricc), entity.Velocity.y);
         }
 
-        if(onGround)
+        //Landed Dust
+        if(entity.landed)
+        {
+            int amount = Random.Range(1,3);
+
+            for (int i = 0; i < amount; i++)
+            {
+                //Set positions and velocity.
+                ParticleSystem.EmitParams ep = new ParticleSystem.EmitParams();
+                ep.position = new Vector3(transform.position.x + (Random.Range(-4, 4) * Physics2DExtra.PIXEL_UNIT),
+                    Physics2DExtra.Bottom(bCollider), transform.position.z);
+
+                //Set velcoyty to be fairly random
+                ep.velocity = new Vector3(Random.Range(-1,1), Random.Range(0.5f, 1f), ep.velocity.z);
+
+                //Particle emit
+                dustSystem.Emit(ep, 1);
+            } 
+        }
+
+        if(entity.onGround)
         {
             //Set this so it can count down when not on ground
             coyoteTimer = coyoteTimeThreshhold;
@@ -135,6 +153,25 @@ public class PlayerController : MonoBehaviour
             if (KeyJump || jumpBufferTimer > 0)
             {
                 Jump();
+            }
+
+            //create dust if moving
+            if(entity.Velocity.x != 0)
+            {
+                if (Random.Range(0, 20) >= 19)
+                {
+                    //Set positions and velocity.
+                    ParticleSystem.EmitParams ep = new ParticleSystem.EmitParams();
+                    ep.position = new Vector3(transform.position.x + (Random.Range(-4,4) * Physics2DExtra.PIXEL_UNIT),
+                        Physics2DExtra.Bottom(bCollider),transform.position.z);
+
+                    //Set velcoyty to be fairly random
+                    ep.velocity = (entity.Velocity * -Random.Range(0.5f,1));
+                    ep.velocity = new Vector3(ep.velocity.x, Random.Range(0.5f, 1f), ep.velocity.z);
+
+                    //Particle emit
+                    dustSystem.Emit(ep, 1);
+                }
             }
 
         }
@@ -158,7 +195,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Variable jump height
-            if(isJumping && KeyJumpRel)
+            if(KeyJumpRel && isJumping)
             {
                 if(entity.Velocity.y > 0)
                 {
@@ -204,6 +241,11 @@ public class PlayerController : MonoBehaviour
 
         Animation();
 
+        if(KeyJumpRel)
+        {
+            Debug.Log("Jump Released");
+        }
+
         //These should only be active one frame
         KeyJump = false;
         KeyJumpRel = false;
@@ -215,6 +257,37 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0;
         jumpBufferTimer = 0;
         isJumping = true;
+
+        int amount = Random.Range(1, 3);
+
+        for (int i = 0; i < amount; i++)
+        {
+            //Set positions and velocity.
+            ParticleSystem.EmitParams ep = new ParticleSystem.EmitParams();
+            ep.position = new Vector3(transform.position.x + (Random.Range(-4, 4) * Physics2DExtra.PIXEL_UNIT),
+                Physics2DExtra.Bottom(bCollider), transform.position.z);
+
+            //Set velcoyty to be fairly random
+            ep.velocity = (entity.Velocity * -Random.Range(0.25f, 0.5f));
+
+            //Particle emit
+            dustSystem.Emit(ep, 1);
+        }
+    }
+
+    public void BurnJump(float jumpForce)
+    {
+        entity.Velocity = new Vector2(entity.Velocity.x, jumpForce);
+        coyoteTimer = 0;
+        jumpBufferTimer = 0;
+        isJumping = false;
+
+        if(gameObject.transform.childCount > 0)
+        {
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+        }
+
+        GameObject obj = GameObject.Instantiate(burnJumpParticle,transform);
     }
 
     public void Animation()
@@ -224,7 +297,7 @@ public class PlayerController : MonoBehaviour
             sRenderer.flipX = (Mathf.Sign(entity.Velocity.x) == -1) ? true : false;
         }
 
-        if (OnGround())
+        if (entity.onGround)
         {
             if(entity.Velocity.x != 0)
             {

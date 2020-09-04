@@ -20,6 +20,12 @@ public class Entity2D : MonoBehaviour
     private Vector2 velocity;
     private Vector2 subPixelVelocity = new Vector2(0,0);
 
+    [HideInInspector]
+    public bool onGround = false;
+
+    [HideInInspector]
+    public bool landed = false;
+
     public LayerMask groundLayer;
     public bool doCollisions = true;
 
@@ -32,6 +38,7 @@ public class Entity2D : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (doCollisions)
         {
             MoveX(velocity.x);
@@ -47,7 +54,7 @@ public class Entity2D : MonoBehaviour
                 subPixelVelocity.x -= move;
                 transform.position += new Vector3(move, 0, 0);
             }
-            
+
             subPixelVelocity.y += velocity.y;
             move = Mathf.Round(subPixelVelocity.y * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
 
@@ -57,7 +64,28 @@ public class Entity2D : MonoBehaviour
                 transform.position += new Vector3(0, move, 0);
             }
         }
+
+        //Check if on ground
+        landed = false;
+        if (OnGround())
+        {
+            if (!onGround)
+            {
+                landed = true;
+            }
+            onGround = true;
+        }
+        else
+        {
+            onGround = false;
+        }
+
         //Collision();
+    }
+
+    private bool OnGround()
+    {
+        return Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, -1 * Physics2DExtra.PIXEL_UNIT), groundLayer);
     }
 
     public bool IsRiding(ref Collider2D collider)

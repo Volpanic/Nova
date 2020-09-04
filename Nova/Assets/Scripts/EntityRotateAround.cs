@@ -14,7 +14,7 @@ public class EntityRotateAround : MonoBehaviour
 
     private List<Vector2> pointPositions = new List<Vector2>();
     private Vector3 initPos;
-    private int listIndex = 0;
+    public int listIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,9 @@ public class EntityRotateAround : MonoBehaviour
             pointPositions.Add((Vector2)initPos + newPos);
         }
 
-        transform.position = pointPositions[0];
+        listIndex = listIndex % Percision;
+
+        transform.position = pointPositions[listIndex];
         Speed = Speed * Physics2DExtra.PIXEL_UNIT;
     }
 
@@ -52,6 +54,14 @@ public class EntityRotateAround : MonoBehaviour
         else
         {
             Gizmos2D.DrawCircle(transform.position, Radius, Percision);
+
+            float inc = (Mathf.PI * 2.0f) / Percision;
+            float cur = inc * listIndex;
+
+            Vector2 newPos = new Vector2(Mathf.Cos(cur), Mathf.Sin(cur)) * Radius;
+
+            Gizmos.color = Color.red;
+            Gizmos2D.DrawCircle((Vector2)transform.position + newPos, 0.25f, Percision);
         }
     }
 

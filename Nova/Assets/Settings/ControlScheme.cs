@@ -71,8 +71,19 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""id"": ""e97a531b-9768-459e-a1ab-e963f8b5dd02"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": ""KeyboardAndGamepad"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f32813da-01c4-4ce4-b4ad-a8d4b5dc1ecc"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -104,7 +115,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""id"": ""dd7aeb79-114e-4159-add9-25bab844d80d"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": ""KeyboardAndGamepad"",
                     ""action"": ""Left"",
                     ""isComposite"": false,
@@ -157,6 +168,22 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 },
                 {
                     ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Mobile"",
+            ""bindingGroup"": ""Mobile"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<VirtualMouse>"",
                     ""isOptional"": true,
                     ""isOR"": false
                 }
@@ -270,6 +297,15 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         {
             if (m_KeyboardAndGamepadSchemeIndex == -1) m_KeyboardAndGamepadSchemeIndex = asset.FindControlSchemeIndex("KeyboardAndGamepad");
             return asset.controlSchemes[m_KeyboardAndGamepadSchemeIndex];
+        }
+    }
+    private int m_MobileSchemeIndex = -1;
+    public InputControlScheme MobileScheme
+    {
+        get
+        {
+            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
+            return asset.controlSchemes[m_MobileSchemeIndex];
         }
     }
     public interface IInGameActions
