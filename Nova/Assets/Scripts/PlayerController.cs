@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -95,12 +96,29 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //KeyRight = (Input.GetAxisRaw("Horizontal") > 0.25f);
-        //KeyLeft = (Input.GetAxisRaw("Horizontal") < -0.25f);
-        //if(!KeyJump) KeyJump = (Input.GetButtonDown("Jump"));
-        //if(!KeyJumpHeld) KeyJumpHeld = (Input.GetButton("Jump"));
-        //if(!KeyJumpRel) KeyJumpRel = (Input.GetButtonUp("Jump"));
+        //TempReload
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            var load = SaveGame.LoadGame();
+
+            if (load != null)
+            {
+                //SceneManager.LoadScene(load.sceneName);
+                GameObject pl = GameObject.Find("Player");
+
+                if(pl != null)
+                {
+                    pl.transform.position = new Vector3(load.playerXPos,load.playerYPos,pl.transform.position.z);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No Save file to respawn to.");
+            }
+        }
+
     }
+
 
     // Update is called once per frame
     void FixedUpdate()

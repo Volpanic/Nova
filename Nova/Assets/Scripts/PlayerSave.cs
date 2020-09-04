@@ -27,7 +27,7 @@ public static class SaveGame
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
+            FileStream stream = new FileStream(path, FileMode.Open);
 
             GameSaveData save = formatter.Deserialize(stream) as GameSaveData;
             stream.Close();
@@ -49,10 +49,10 @@ public class GameSaveData
     public float playerYPos = 0;
     public string sceneName = "";
 
-    public GameSaveData(PlayerController player)
+    public GameSaveData(float xPos,float yPos ,PlayerController player)
     {
-        playerXPos = player.transform.position.x;
-        playerYPos = player.transform.position.y;
+        playerXPos = xPos;
+        playerYPos = yPos;
         sceneName = SceneManager.GetActiveScene().name;
     }
 }

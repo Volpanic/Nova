@@ -24,11 +24,11 @@ public class SavePoint : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //collision.gameObject.GetComponent<PlayerController>().
-            StartFire();
+            StartFire(collision.gameObject);
         }
     }
 
-    public void StartFire()
+    public void StartFire(GameObject player)
     {
         animator.Play("SaveTorchFlicker");
 
@@ -43,6 +43,8 @@ public class SavePoint : MonoBehaviour
             }
         }
 
+        GameSaveData gsd = new GameSaveData(transform.position.x,transform.position.y,player.GetComponent<PlayerController>());
+        SaveGame.Save(gsd);
     }
 
     public void StopFire()
