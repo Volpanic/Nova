@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     bool KeyJump = false;
     bool KeyJumpHeld = false;
     bool KeyJumpRel = false;
+    public ControlScheme controls;
 
     //
     bool isJumping = false;
@@ -48,11 +49,41 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get Components
         entity = GetComponent<Entity2D>();
         bCollider = GetComponent<BoxCollider2D>();
         sRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        //Setup Input
+        controls = new ControlScheme();
+        controls.InGame.Enable();
+        controls.InGame.Right.started += Right_started;
+        controls.InGame.Right.canceled += Right_canceled;
+        controls.InGame.Left.started += Left_started;
+        controls.InGame.Left.canceled += Left_canceled;
+
+        controls.InGame.Jump.started += Jump_started;
+        controls.InGame.Jump.canceled += Jump_canceled; ;
     }
+
+    private void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        KeyJumpHeld = false;
+        KeyJump = false;
+        KeyJumpRel = true;
+    }
+
+    private void Jump_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        KeyJumpHeld = true;
+        KeyJump = true;
+    }
+
+    private void Right_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyRight = true;}
+    private void Right_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyRight = false;}
+    private void Left_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyLeft = true;}
+    private void Left_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyLeft = false;}
 
     public void Hurt()
     {
@@ -65,11 +96,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        KeyRight = (Input.GetAxisRaw("Horizontal") > 0.25f);
-        KeyLeft = (Input.GetAxisRaw("Horizontal") < -0.25f);
-        if(!KeyJump) KeyJump = (Input.GetButtonDown("Jump"));
-        if(!KeyJumpHeld) KeyJumpHeld = (Input.GetButton("Jump"));
-        if(!KeyJumpRel) KeyJumpRel = (Input.GetButtonUp("Jump"));
+        //KeyRight = (Input.GetAxisRaw("Horizontal") > 0.25f);
+        //KeyLeft = (Input.GetAxisRaw("Horizontal") < -0.25f);
+        //if(!KeyJump) KeyJump = (Input.GetButtonDown("Jump"));
+        //if(!KeyJumpHeld) KeyJumpHeld = (Input.GetButton("Jump"));
+        //if(!KeyJumpRel) KeyJumpRel = (Input.GetButtonUp("Jump"));
     }
 
     // Update is called once per frame
@@ -172,8 +203,9 @@ public class PlayerController : MonoBehaviour
         }
 
         Animation();
+
+        //These should only be active one frame
         KeyJump = false;
-        KeyJumpHeld = false;
         KeyJumpRel = false;
     }
 

@@ -56,8 +56,8 @@ public class MoveingSolid : MonoBehaviour
         subPixelVelocity.x += xAmount;
         subPixelVelocity.y += yAmount;
 
-        float moveX = Mathf.RoundToInt(subPixelVelocity.x * Physics2DExtra.PIXEL_SIZE) / Physics2DExtra.PIXEL_SIZE; // In Units 
-        float moveY = Mathf.RoundToInt(subPixelVelocity.y * Physics2DExtra.PIXEL_SIZE) / Physics2DExtra.PIXEL_SIZE; // In Units 
+        float moveX = Mathf.Round(subPixelVelocity.x * Physics2DExtra.PIXEL_SIZE) / Physics2DExtra.PIXEL_SIZE; // In Units 
+        float moveY = Mathf.Round(subPixelVelocity.y * Physics2DExtra.PIXEL_SIZE) / Physics2DExtra.PIXEL_SIZE; // In Units 
 
         if(moveX != 0 || moveY != 0)
         {
@@ -75,7 +75,7 @@ public class MoveingSolid : MonoBehaviour
                 transform.position += new Vector3(moveX, 0, 0);
                 Physics2D.SyncTransforms();
 
-                if (moveX > Physics2DExtra.PIXEL_UNIT)
+                if (moveX > 0)
                 {
                     foreach(Entity2D ent in AllEntities)
                     {
