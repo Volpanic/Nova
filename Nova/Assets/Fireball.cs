@@ -53,16 +53,19 @@ public class Fireball : MonoBehaviour
 
             playerEntity.BurnJump(6);
 
-            //Emit fire particle
-            for(int i = 0; i < Random.Range(6,10); i++)
+            if (pSystem != null)
             {
-                //Set positions and velocity.
-                ParticleSystem.EmitParams ep = new ParticleSystem.EmitParams();
-                ep.position = transform.position;
-                ep.velocity = new Vector2(Random.Range(-1,1), Random.Range(-1, 1));
+                //Emit fire particle
+                for (int i = 0; i < Random.Range(6, 10); i++)
+                {
+                    //Set positions and velocity.
+                    ParticleSystem.EmitParams ep = new ParticleSystem.EmitParams();
+                    ep.position = transform.position;
+                    ep.velocity = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
 
-                //Particle emit
-                pSystem.Emit(ep, 1);
+                    //Particle emit
+                    pSystem.Emit(ep, 1);
+                }
             }
         }
     }

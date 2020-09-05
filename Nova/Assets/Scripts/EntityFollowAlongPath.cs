@@ -14,7 +14,8 @@ public class EntityFollowAlongPath : MonoBehaviour
         Reverse
     };
 
-    Entity2D entitiy;
+    Entity2D entitiy = null;
+    MoveingSolid movingSolid = null;
 
     public bool rotateWith = false;
     public PathType pathType = PathType.Closed;
@@ -35,7 +36,12 @@ public class EntityFollowAlongPath : MonoBehaviour
 
         if (entitiy == null)
         {
-            Debug.LogWarning("Object : " + gameObject.name + " needs and Entity2D to use EntityFollowAlongPath.");
+            movingSolid = GetComponent<MoveingSolid>();
+
+            if (movingSolid == null)
+            {
+                Debug.LogWarning("Object : " + gameObject.name + " needs and Entity2D or MoveingSolid to use EntityFollowAlongPath.");
+            }
         }
 
         speed = speed * Physics2DExtra.PIXEL_UNIT;
@@ -95,7 +101,14 @@ public class EntityFollowAlongPath : MonoBehaviour
         //    entitiy.Velocity = movement;
         //}
 
-        entitiy.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        if (entitiy != null)
+        {
+            entitiy.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        }
+        else
+        {
+            movingSolid.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        }
 
         if (rotateWith)
         {

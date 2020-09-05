@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EntityRotateAround : MonoBehaviour
 {
-    Entity2D entitiy;
+    Entity2D entitiy = null;
+    MoveingSolid movingSolid = null;
 
     public float Radius = 1;
     public float Speed = 1;
@@ -23,7 +24,12 @@ public class EntityRotateAround : MonoBehaviour
 
         if (entitiy == null)
         {
-            Debug.LogWarning("Object : " + gameObject.name + " needs and Entity2D to use EntityFollowAlongPath.");
+            movingSolid = GetComponent<MoveingSolid>();
+
+            if (movingSolid == null)
+            { 
+            Debug.LogWarning("Object : " + gameObject.name + " needs and Entity2D or MoveingSolid to use EntityFollowAlongPath.");
+            }
         }
 
 
@@ -81,7 +87,14 @@ public class EntityRotateAround : MonoBehaviour
         }
 
 
-        entitiy.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], Speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        if (entitiy != null)
+        {
+            entitiy.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], Speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        }
+        else
+        {
+            movingSolid.Velocity = (Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex], Speed) - (Vector2)transform.position) * Physics2DExtra.PIXEL_SIZE;
+        }
 
         if (rotateWith)
         {
