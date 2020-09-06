@@ -31,6 +31,23 @@ public class EntityFollowAlongPathEditor : Editor
     {
         DrawDefaultInspector();
 
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Add Point"))
+        {
+            int pointCount = entityPath.pointPositions.Count;
+            if (pointCount <= 1)
+            {
+                entityPath.pointPositions.Add(entityPath.pointPositions[0] + new Vector2(0,1));
+            }
+            else
+            {
+                Vector2 normal = (entityPath.pointPositions[pointCount - 1] - entityPath.pointPositions[pointCount - 2]).normalized;
+                entityPath.pointPositions.Add(entityPath.pointPositions[pointCount - 1] + normal);
+            }
+        }
+       
+
         if (GUILayout.Button("Center Points"))
         {
             float inc = (Mathf.PI * 2.0f) / (entityPath.pointPositions.Count - 1);
@@ -55,6 +72,8 @@ public class EntityFollowAlongPathEditor : Editor
             }
             SceneView.RepaintAll();
         }
+
+        GUILayout.EndHorizontal();
 
         if (GUI.changed)
         {

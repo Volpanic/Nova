@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour
 {
     public GameObject toFollow;
     private bool hasRigidBody = false;
     private Entity2D followBody;
+
+    public TilemapRenderer tmr;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +25,7 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 target = transform.position;
-
+        
         if (hasRigidBody)
         {
             target = new Vector3(toFollow.transform.position.x + (followBody.Velocity.x * 5.0f),
@@ -37,5 +40,10 @@ public class CameraController : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position,target,0.32f);
+
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x,tmr.bounds.min.x,tmr.bounds.max.x),
+            Mathf.Clamp(transform.position.y, tmr.bounds.min.y, tmr.bounds.max.y),
+            transform.position.z);
     }
 }
