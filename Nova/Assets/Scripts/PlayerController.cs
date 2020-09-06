@@ -259,11 +259,6 @@ public class PlayerController : MonoBehaviour
 
         Animation();
 
-        if(KeyJumpRel)
-        {
-            Debug.Log("Jump Released");
-        }
-
         //These should only be active one frame
         KeyJump = false;
         KeyJumpRel = false;

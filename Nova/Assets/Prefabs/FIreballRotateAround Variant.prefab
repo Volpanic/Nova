@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 3.5
   Percision: 16
   rotateWith: 1
+  listIndex: 0
 --- !u!1001 &8853690249697831178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,17 +47,17 @@ PrefabInstance:
     - target: {fileID: 8549962599883977211, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}
       propertyPath: m_Name
-      value: FIreballRotateAround
+      value: FIreballRotateAround Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8549962599883977214, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8549962599883977214, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8549962599883977214, guid: a394e11a5974ee2479ff1410b8fa1c25,
         type: 3}
