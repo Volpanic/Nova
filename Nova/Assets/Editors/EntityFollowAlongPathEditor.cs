@@ -45,6 +45,7 @@ public class EntityFollowAlongPathEditor : Editor
                 Vector2 normal = (entityPath.pointPositions[pointCount - 1] - entityPath.pointPositions[pointCount - 2]).normalized;
                 entityPath.pointPositions.Add(entityPath.pointPositions[pointCount - 1] + normal);
             }
+            SceneView.RepaintAll();
         }
        
 

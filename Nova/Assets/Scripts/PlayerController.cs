@@ -67,23 +67,30 @@ public class PlayerController : MonoBehaviour
         controls.InGame.Jump.canceled += Jump_canceled;
     }
 
-    private void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Jump_canceled(); }
+    public void Jump_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Jump_started() ; }
+    public void Right_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Right_started(); }
+    public void Right_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Right_canceled(); }
+    public void Left_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Left_started(); }
+    public void Left_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Left_canceled(); }
+
+    public void Jump_canceled()
     {
         KeyJumpHeld = false;
         KeyJumpRel = true;
     }
 
-    private void Jump_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void Jump_started()
     {
         KeyJumpHeld = true;
         KeyJump = true;
         KeyJumpRel = false;
     }
 
-    private void Right_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyRight = true;}
-    private void Right_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyRight = false;}
-    private void Left_started(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyLeft = true;}
-    private void Left_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { KeyLeft = false;}
+    public void Right_started() { KeyRight = true;}
+    public void Right_canceled() { KeyRight = false;}
+    public void Left_started() { KeyLeft = true;}
+    public void Left_canceled() { KeyLeft = false;}
 
     public void Hurt()
     {

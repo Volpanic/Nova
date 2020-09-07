@@ -51,7 +51,7 @@ public class Fireball : MonoBehaviour
                 playerEntity = collision.gameObject.GetComponent<PlayerController>();
             }
 
-            playerEntity.BurnJump(6);
+            playerEntity.BurnJump(7);
 
             if (pSystem != null)
             {
