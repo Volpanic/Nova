@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     //
     bool isJumping = false;
+    bool doFireJump = false;
+    float fireJumpAmount = 0.0f;
 
     private bool recentlyHurt = false;
     private int hurtTimer = 0;
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
         controls.InGame.Jump.started += Jump_started;
         controls.InGame.Jump.canceled += Jump_canceled;
+
+        Application.targetFrameRate = 60;
     }
 
     public void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Jump_canceled(); }
@@ -134,6 +138,23 @@ public class PlayerController : MonoBehaviour
         if (!entity.onGround) fricc = airFirction;
 
         float grav = 0.2f;
+
+        //Lock it to this frame
+        if(doFireJump)
+        {
+            entity.Velocity = new Vector2(entity.Velocity.x, fireJumpAmount);
+            coyoteTimer = 0;
+            jumpBufferTimer = 0;
+            isJumping = false;
+            doFireJump = false;
+
+            if (gameObject.transform.childCount > 0)
+            {
+                Destroy(gameObject.transform.GetChild(0).gameObject);
+            }
+
+            GameObject obj = GameObject.Instantiate(burnJumpParticle, transform);
+        }
 
         //Mvoement
         if (KeyRight)
@@ -297,17 +318,8 @@ public class PlayerController : MonoBehaviour
 
     public void BurnJump(float jumpForce)
     {
-        entity.Velocity = new Vector2(entity.Velocity.x, jumpForce);
-        coyoteTimer = 0;
-        jumpBufferTimer = 0;
-        isJumping = false;
-
-        if(gameObject.transform.childCount > 0)
-        {
-            Destroy(gameObject.transform.GetChild(0).gameObject);
-        }
-
-        GameObject obj = GameObject.Instantiate(burnJumpParticle,transform);
+        doFireJump = true;
+        fireJumpAmount = jumpForce;
     }
 
     public void Animation()

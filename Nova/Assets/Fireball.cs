@@ -12,9 +12,6 @@ public class Fireball : MonoBehaviour
     public float Speed = 1;
     public ParticleSystem pSystem = null;
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +48,7 @@ public class Fireball : MonoBehaviour
                 playerEntity = collision.gameObject.GetComponent<PlayerController>();
             }
 
-            playerEntity.BurnJump(7);
+            playerEntity.BurnJump(6.5f);
 
             if (pSystem != null)
             {

@@ -85,7 +85,7 @@ public class MoveingSolid : MonoBehaviour
                         }
                     }
                 }
-                else if(moveX < -Physics2DExtra.PIXEL_UNIT)
+                else if(moveX < 0)
                 {
                     foreach(Entity2D ent in AllEntities)
                     {
