@@ -6,20 +6,37 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
 
+    public string sceneToGoTo;
+    public Animator animator;
+
+    private bool isTran = false;
+    public GameObject canvasObject;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void Update()
+    public void BeginTransition()
     {
-        
+        if(!isTran)
+        {
+            isTran = true;
+            DontDestroyOnLoad(canvasObject);
+            animator.Play("ani_transition_in");
+        }
     }
 
-    public void GoToScene(string sceneName)
+    public void GoToScene()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneToGoTo);
+        animator.Play("ani_transition_out");
+    }
+
+    public void EndTransition()
+    {
+        Destroy(canvasObject);
     }
 }
