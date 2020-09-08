@@ -6,17 +6,13 @@ public class SavePoint : MonoBehaviour
 {
 
     private Animator animator;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +27,7 @@ public class SavePoint : MonoBehaviour
     public void StartFire(GameObject player)
     {
         animator.Play("SaveTorchFlicker");
+        audioSource.Play();
 
         //Only have one fire active at once
         SavePoint[] points = FindObjectsOfType<SavePoint>();
