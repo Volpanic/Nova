@@ -79,6 +79,22 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
+    private void OnDisable()
+    {
+        if (controls != null)
+        {
+            controls.InGame.Disable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (controls != null)
+        {
+            controls.InGame.Enable();
+        }
+    }
+
     private void Respawn_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         Respawn();

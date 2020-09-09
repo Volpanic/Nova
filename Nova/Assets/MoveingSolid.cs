@@ -14,7 +14,6 @@ public class MoveingSolid : MonoBehaviour
 
     private Vector2 velocity;
     private Vector2 subPixelVelocity = new Vector2(0, 0);
-    private int SinTimer = 0;
     private LayerMask originalLayerMask; 
 
     public LayerMask entitiyLayer;

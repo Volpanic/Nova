@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MobileButtonScript : MonoBehaviour
 {
     private bool overide = false;
-    private Button button = null;
 
     public UnityEvent OnPressed = new UnityEvent();
     public UnityEvent OnReleased = new UnityEvent();

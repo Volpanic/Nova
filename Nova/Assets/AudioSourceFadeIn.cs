@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioSourceFadeIn : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class AudioSourceFadeIn : MonoBehaviour
         initialVolume = audioSource.volume;
         audioSource.volume = 0;
         DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
+
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        fadeIn = false;
     }
 
     // Update is called once per frame
@@ -41,10 +49,5 @@ public class AudioSourceFadeIn : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        fadeIn = false;
     }
 }

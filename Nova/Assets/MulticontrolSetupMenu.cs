@@ -75,7 +75,18 @@ public class MulticontrolSetupMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Menus.Disable();
+        if (controls != null)
+        {
+            controls.Menus.Disable();
+        }
+    }
+    
+    private void OnEnable()
+    {
+        if (controls != null)
+        {
+            controls.Menus.Enable();
+        }
     }
 
     private void OnDestroy()

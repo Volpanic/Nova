@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneTransitionMaker : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class SceneTransitionMaker : MonoBehaviour
     public bool spawnPlayer = false;
     public float playerX = 0;
     public float playerY = 0;
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
 
     public void DoTransition(string roomName)
     {
@@ -35,12 +41,12 @@ public class SceneTransitionMaker : MonoBehaviour
         playerY = position.y;
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        if(spawnPlayer)
+        if (spawnPlayer)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.transform.position = new Vector3(playerX,playerY,player.transform.position.z);
+            player.transform.position = new Vector3(playerX, playerY, player.transform.position.z);
 
             Destroy(gameObject);
         }
