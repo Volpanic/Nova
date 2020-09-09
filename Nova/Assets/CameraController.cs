@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject toFollow;
     private bool hasRigidBody = false;
-    private Entity2D followBody;
+    private Entity2D followBody = null;
 
     private Camera mainCam;
 
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         mainCam = GetComponent<Camera>();
-        followBody = gameObject.GetComponent<Entity2D>();
+        followBody = toFollow.GetComponent<Entity2D>();
         if(followBody != null)
         {
             hasRigidBody = true;
@@ -43,8 +43,8 @@ public class CameraController : MonoBehaviour
         
         if (hasRigidBody)
         {
-            target = new Vector3(toFollow.transform.position.x + (followBody.Velocity.x * 5.0f),
-                toFollow.transform.position.y + (followBody.Velocity.y * 5.0f),
+            target = new Vector3(toFollow.transform.position.x,
+                toFollow.transform.position.y,
                 transform.position.z);
         }
         else

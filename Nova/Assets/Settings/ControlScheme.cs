@@ -41,6 +41,14 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""8790cdb9-bd27-4265-8400-5c5e510e93d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -140,6 +148,28 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardAndGamepad"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c30b160-f01c-428f-9e5b-b2b5fca02388"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndGamepad"",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad2dbd06-3456-4e15-9b77-57a3b5c7542d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -420,6 +450,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         m_InGame_Right = m_InGame.FindAction("Right", throwIfNotFound: true);
         m_InGame_Left = m_InGame.FindAction("Left", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
+        m_InGame_Respawn = m_InGame.FindAction("Respawn", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_Left = m_Menus.FindAction("Left", throwIfNotFound: true);
@@ -479,6 +510,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_Right;
     private readonly InputAction m_InGame_Left;
     private readonly InputAction m_InGame_Jump;
+    private readonly InputAction m_InGame_Respawn;
     public struct InGameActions
     {
         private @ControlScheme m_Wrapper;
@@ -486,6 +518,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         public InputAction @Right => m_Wrapper.m_InGame_Right;
         public InputAction @Left => m_Wrapper.m_InGame_Left;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
+        public InputAction @Respawn => m_Wrapper.m_InGame_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -504,6 +537,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
+                @Respawn.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnRespawn;
+                @Respawn.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnRespawn;
+                @Respawn.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnRespawn;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -517,6 +553,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Respawn.started += instance.OnRespawn;
+                @Respawn.performed += instance.OnRespawn;
+                @Respawn.canceled += instance.OnRespawn;
             }
         }
     }
@@ -609,6 +648,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRespawn(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {

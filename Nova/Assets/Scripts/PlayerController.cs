@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject burnJumpParticle;
 
     public LayerMask groundLayer;
+    public GameObject transitionMakerObject;
 
     private Entity2D entity;
     private BoxCollider2D bCollider;
@@ -68,7 +69,14 @@ public class PlayerController : MonoBehaviour
         controls.InGame.Jump.started += Jump_started;
         controls.InGame.Jump.canceled += Jump_canceled;
 
+        controls.InGame.Respawn.started += Respawn_started;
+
         Application.targetFrameRate = 60;
+    }
+
+    private void Respawn_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        Respawn();
     }
 
     public void Jump_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) { Jump_canceled(); }
@@ -96,6 +104,38 @@ public class PlayerController : MonoBehaviour
     public void Left_started() { KeyLeft = true;}
     public void Left_canceled() { KeyLeft = false;}
 
+    public void Respawn()
+    {
+        var load = SaveGame.LoadGame();
+
+        if (load != null)
+        {
+            GameObject obj = Instantiate(transitionMakerObject,Vector3.zero,Quaternion.identity);
+            SceneTransitionMaker maker = obj.GetComponent<SceneTransitionMaker>();
+            maker.DoTransitionMovePlayer(load);
+        }
+        else
+        {
+            Debug.LogWarning("No Save file to respawn to.");
+        }
+    }
+    
+    public void GoToScene(Vector2 targetPos, string sceneName)
+    {
+        var load = SaveGame.LoadGame();
+
+        if (load != null)
+        {
+            GameObject obj = Instantiate(transitionMakerObject,Vector3.zero,Quaternion.identity);
+            SceneTransitionMaker maker = obj.GetComponent<SceneTransitionMaker>();
+            maker.DoTransitionMovePlayer(load,sceneName, targetPos);
+        }
+        else
+        {
+            Debug.LogWarning("No Save file to respawn to.");
+        }
+    }
+
     public void Hurt()
     {
         if(!recentlyHurt)
@@ -104,32 +144,6 @@ public class PlayerController : MonoBehaviour
             hurtTimer = 90;
         }
     }
-
-    private void Update()
-    {
-        //TempReload
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            var load = SaveGame.LoadGame();
-
-            if (load != null)
-            {
-                //SceneManager.LoadScene(load.sceneName);
-                GameObject pl = GameObject.Find("Player");
-
-                if(pl != null)
-                {
-                    pl.transform.position = new Vector3(load.playerXPos,load.playerYPos,pl.transform.position.z);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("No Save file to respawn to.");
-            }
-        }
-
-    }
-
 
     // Update is called once per frame
     void FixedUpdate()

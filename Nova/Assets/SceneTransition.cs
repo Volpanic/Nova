@@ -25,14 +25,13 @@ public class SceneTransition : MonoBehaviour
         {
             isTran = true;
             DontDestroyOnLoad(canvasObject);
-            animator.Play("ani_transition_in");
+            animator.Play("ani_transition_out");
         }
     }
 
     public void GoToScene()
     {
         SceneManager.LoadScene(sceneToGoTo);
-        animator.Play("ani_transition_out");
     }
 
     public void EndTransition()

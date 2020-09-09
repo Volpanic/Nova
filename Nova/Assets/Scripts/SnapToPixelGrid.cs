@@ -16,8 +16,8 @@ public class SnapToPixelGrid : MonoBehaviour // Script by Ryan Nielson (https://
         Vector3 newLocalPosition = Vector3.zero;
         newLocalPosition.z = transform.position.z;
 
-        newLocalPosition.x = (Mathf.Round(transform.position.x * pixelsPerUnit) / pixelsPerUnit);
-        newLocalPosition.y = (Mathf.Round(transform.position.y * pixelsPerUnit) / pixelsPerUnit);
+        newLocalPosition.x = (Mathf.Ceil(transform.position.x * pixelsPerUnit) / pixelsPerUnit);
+        newLocalPosition.y = (Mathf.Ceil(transform.position.y * pixelsPerUnit) / pixelsPerUnit);
 
         transform.position = newLocalPosition;
     }
