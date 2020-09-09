@@ -19,11 +19,15 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public GameObject transitionMakerObject;
 
+    public AudioClip jumpSound;
+    public AudioClip hurtSound;
+
     private Entity2D entity;
     private BoxCollider2D bCollider;
     private SpriteRenderer sRenderer;
     private ParticleSystem dustSystem;
     private Animator animator;
+    private AudioSource audioSource;
 
     //Input
     bool KeyRight = false;
@@ -57,6 +61,7 @@ public class PlayerController : MonoBehaviour
         sRenderer = GetComponent<SpriteRenderer>();
         dustSystem = GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         //Setup Input
         controls = new ControlScheme();
@@ -140,6 +145,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!recentlyHurt)
         {
+            audioSource.PlayOneShot(hurtSound);
             recentlyHurt = true;
             hurtTimer = 90;
         }
@@ -312,6 +318,7 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0;
         jumpBufferTimer = 0;
         isJumping = true;
+       // audioSource.PlayOneShot(jumpSound);
 
         int amount = Random.Range(1, 3);
 

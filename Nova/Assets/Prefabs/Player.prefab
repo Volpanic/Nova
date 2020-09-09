@@ -139,6 +139,8 @@ MonoBehaviour:
     m_Bits: 256
   transitionMakerObject: {fileID: 2015710942762181611, guid: a8dd938d31a52ad4d8de00d23428bae2,
     type: 3}
+  jumpSound: {fileID: 8300000, guid: 504ecce43e53a3c408ac786666775bba, type: 3}
+  hurtSound: {fileID: 8300000, guid: 0a94bfbfad326774fa1682d42be0ecff, type: 3}
 --- !u!114 &5193699117895598069
 MonoBehaviour:
   m_ObjectHideFlags: 0

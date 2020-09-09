@@ -12,10 +12,13 @@ public class Fireball : MonoBehaviour
     public float Speed = 1;
     public ParticleSystem pSystem = null;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         entity = GetComponent<Entity2D>();
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,12 @@ public class Fireball : MonoBehaviour
             }
 
             playerEntity.BurnJump(6.5f);
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+            
 
             if (pSystem != null)
             {

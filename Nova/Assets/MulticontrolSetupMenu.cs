@@ -73,9 +73,13 @@ public class MulticontrolSetupMenu : MonoBehaviour
         Debug.Log("Selected Menu Item: " + selectedItem.ToString());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        controls.Menus.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        controls.Menus.Disable();
     }
 }
