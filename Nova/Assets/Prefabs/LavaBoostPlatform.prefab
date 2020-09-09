@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8521586441265760181}
   - component: {fileID: 8521586441265760180}
   - component: {fileID: 8521586441265760183}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LavaHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

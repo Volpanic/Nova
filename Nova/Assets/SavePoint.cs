@@ -47,5 +47,6 @@ public class SavePoint : MonoBehaviour
     public void StopFire()
     {
         animator.Play("ani_save_torch_idle");
+        audioSource.Stop();
     }
 }
