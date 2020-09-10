@@ -14,6 +14,13 @@ public class MainMenuActions : MonoBehaviour
         transition.DoTransition("scn_volcano1");
     }
     
+    public void ToTutorial()
+    {
+        if (transition == null) return;
+
+        transition.DoTransition("scn_tutorial");
+    }
+    
     public void Continue()
     {
         if (transition == null) return;

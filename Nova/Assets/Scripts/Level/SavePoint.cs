@@ -17,7 +17,7 @@ public class SavePoint : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         lightSource = GetComponent<Light2D>();
 
-        lightSource.enabled = false;
+       // lightSource.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,8 +60,8 @@ public class SavePoint : MonoBehaviour
     {
         animator.Play("ani_save_torch_idle");
         audioSource.Stop();
-        lightSource.intensity = 0;
-        lightSource.enabled = false;
+        //lightSource.intensity = 0;
+        //lightSource.enabled = false;
         activated = false;
     }
 }
