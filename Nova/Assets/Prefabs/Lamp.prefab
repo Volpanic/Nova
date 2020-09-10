@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 820211822479499199}
   - component: {fileID: 4390182983490626128}
   - component: {fileID: 5321920130616419850}
+  - component: {fileID: 5145972492026569615}
   m_Layer: 9
   m_Name: Lamp
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 0
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0
+  m_FalloffIntensity: 0.489
   m_Color: {r: 1, g: 0.7933259, b: 0.7216981, a: 1}
   m_Intensity: 4
   m_LightVolumeOpacity: 0
@@ -65,8 +66,8 @@ MonoBehaviour:
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 15
   m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 7
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightParametricRadius: 4
+  m_ShapeLightFalloffSize: 3.82
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -0.5, y: -0.5, z: 0}
@@ -124,3 +125,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5145972492026569615
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274214079215406433}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06cdd5fa02ba9bf488c107258d80994b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

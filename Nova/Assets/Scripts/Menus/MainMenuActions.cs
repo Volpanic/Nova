@@ -18,7 +18,15 @@ public class MainMenuActions : MonoBehaviour
     {
         if (transition == null) return;
 
-        transition.DoTransition("scn_tutorial");
+        //Only show controls on pc, Mobile and console controls can be infered.
+        if (!Application.isConsolePlatform && !Application.isMobilePlatform)
+        {
+            transition.DoTransition("scn_tutorial");
+        }
+        else
+        {
+            NewGame();
+        }
     }
     
     public void Continue()
@@ -37,6 +45,8 @@ public class MainMenuActions : MonoBehaviour
             {
                 Debug.LogWarning("No Save file to respawn to.");
             }
+
+            Debug.Log(Path.Combine(Application.persistentDataPath, SaveGame.fileName));
         }
     }
     

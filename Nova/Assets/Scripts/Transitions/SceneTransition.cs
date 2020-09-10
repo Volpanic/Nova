@@ -36,6 +36,7 @@ public class SceneTransition : MonoBehaviour
 
     public void EndTransition()
     {
+        GL.Clear(true,true,Color.black);
         Destroy(canvasObject);
     }
 }

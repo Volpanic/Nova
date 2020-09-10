@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour
@@ -11,6 +12,7 @@ public class CameraController : MonoBehaviour
     private Entity2D followBody = null;
 
     private Camera mainCam;
+    private PixelPerfectCamera pixelCam;
 
     public TilemapRenderer tmr;
 
@@ -21,7 +23,9 @@ public class CameraController : MonoBehaviour
     {
         mainCam = GetComponent<Camera>();
         followBody = toFollow.GetComponent<Entity2D>();
-        if(followBody != null)
+        pixelCam = GetComponent<PixelPerfectCamera>();
+
+        if (followBody != null)
         {
             hasRigidBody = true;
         }

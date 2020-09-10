@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -140,6 +141,13 @@ public class PlayerController : MonoBehaviour
         controls.InGame.Jump.canceled   += Jump_canceled;
 
         controls.InGame.Respawn.started += Respawn_started;
+
+        //Makes a save at the start if one does not exsist
+        if (!File.Exists(Path.Combine(Application.persistentDataPath, SaveGame.fileName)))
+        {
+            GameSaveData gsd = new GameSaveData(transform.position.x, transform.position.y, this);
+            SaveGame.Save(gsd);
+        }
 
         Application.targetFrameRate = 60;
     }
