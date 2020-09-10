@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class SavePoint : MonoBehaviour
 {
     private bool activated = false;
     private Animator animator;
     private AudioSource audioSource;
+    private Light2D lightSource;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        lightSource = GetComponent<Light2D>();
+
+        lightSource.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +51,7 @@ public class SavePoint : MonoBehaviour
             SaveGame.Save(gsd);
 
             player.GetComponent<PlayerController>().RefillHealth();
+            //lightSource.enabled = true;
             activated = true;
         }
     }
@@ -54,6 +60,8 @@ public class SavePoint : MonoBehaviour
     {
         animator.Play("ani_save_torch_idle");
         audioSource.Stop();
+        lightSource.intensity = 0;
+        lightSource.enabled = false;
         activated = false;
     }
 }

@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour
 
         screenHalf.x += 24.0f * Physics2DExtra.PIXEL_UNIT;
         screenHalf.y += 24.0f * Physics2DExtra.PIXEL_UNIT;
+
+        transform.position = new Vector3(toFollow.transform.position.x, toFollow.transform.position.y,transform.position.z);
     }
 
     // Update is called once per frame
@@ -54,7 +56,9 @@ public class CameraController : MonoBehaviour
                 transform.position.z);
         }
 
-        transform.position = Vector3.Lerp(transform.position,target,0.32f);
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x,target.x,0.32f),
+            Mathf.Lerp(transform.position.y, target.y, 0.16f),
+            transform.position.z);
 
         float hWidth = mainCam.orthographicSize;
         float hHeight = mainCam.orthographicSize;
