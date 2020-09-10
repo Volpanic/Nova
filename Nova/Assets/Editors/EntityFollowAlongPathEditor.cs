@@ -95,9 +95,9 @@ public class EntityFollowAlongPathEditor : Editor
             {
                 if (!Application.isPlaying)
                 {
-                    entityPath.pointPositions[i] = ((Vector2)Handles.FreeMoveHandle(entityPath.pointPositions[i], Quaternion.identity, .25f, Vector3.zero, Handles.RectangleHandleCap));
-                    entityPath.pointPositions[i] = new Vector2((Mathf.Round(entityPath.pointPositions[i].x * 1f) / 1f),
-                        (Mathf.Round(entityPath.pointPositions[i].y * 1f) / 1f));
+                    entityPath.pointPositions[i] = ((Vector2)Handles.FreeMoveHandle(entityPath.pointPositions[i], Quaternion.identity, 0.25f, Vector3.zero, Handles.RectangleHandleCap));
+                    entityPath.pointPositions[i] = new Vector2((Mathf.Floor(entityPath.pointPositions[i].x * 2f) / 2f),
+                        (Mathf.Floor(entityPath.pointPositions[i].y * 2f) / 2f));
                 }
             }
             else

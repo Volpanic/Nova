@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SavePoint : MonoBehaviour
 {
-
+    private bool activated = false;
     private Animator animator;
     private AudioSource audioSource;
 
@@ -26,27 +26,34 @@ public class SavePoint : MonoBehaviour
 
     public void StartFire(GameObject player)
     {
-        animator.Play("SaveTorchFlicker");
-        audioSource.Play();
-
-        //Only have one fire active at once
-        SavePoint[] points = FindObjectsOfType<SavePoint>();
-
-        foreach(SavePoint point in points)
+        if (!activated)
         {
-            if(point != this)
-            {
-                point.StopFire();
-            }
-        }
+            animator.Play("SaveTorchFlicker");
+            audioSource.Play();
 
-        GameSaveData gsd = new GameSaveData(transform.position.x,transform.position.y,player.GetComponent<PlayerController>());
-        SaveGame.Save(gsd);
+            //Only have one fire active at once
+            SavePoint[] points = FindObjectsOfType<SavePoint>();
+
+            foreach (SavePoint point in points)
+            {
+                if (point != this)
+                {
+                    point.StopFire();
+                }
+            }
+
+            GameSaveData gsd = new GameSaveData(transform.position.x, transform.position.y, player.GetComponent<PlayerController>());
+            SaveGame.Save(gsd);
+
+            player.GetComponent<PlayerController>().RefillHealth();
+            activated = true;
+        }
     }
 
     public void StopFire()
     {
         animator.Play("ani_save_torch_idle");
         audioSource.Stop();
+        activated = false;
     }
 }

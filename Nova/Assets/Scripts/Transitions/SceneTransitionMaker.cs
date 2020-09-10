@@ -11,9 +11,12 @@ public class SceneTransitionMaker : MonoBehaviour
     public float playerX = 0;
     public float playerY = 0;
 
+    private Scene initScene;
+
     private void Start()
     {
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        initScene = SceneManager.GetActiveScene();
     }
 
     public void DoTransition(string roomName)
@@ -46,10 +49,16 @@ public class SceneTransitionMaker : MonoBehaviour
     {
         if (spawnPlayer)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.transform.position = new Vector3(playerX, playerY, player.transform.position.z);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                player.transform.position = new Vector3(playerX, playerY, player.transform.position.z);
 
-            Destroy(gameObject);
+                if (initScene != arg0)
+                {
+                    //Destroy(gameObject);
+                }
+            }
         }
     }
 }

@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public enum PlayerState
+    {
+        Gameplay = 0,
+        Dead = 1
+    };
+
     const float PIXEL_SCALE = 1.0f / 16.0f;
 
     public float MoveSpeed = 2.0f;
@@ -15,12 +22,17 @@ public class PlayerController : MonoBehaviour
     public float airFirction = 0.33f;
 
     public GameObject burnJumpParticle;
+    public GameObject playerDeathParticles;
 
     public LayerMask groundLayer;
     public GameObject transitionMakerObject;
 
     public AudioClip jumpSound;
     public AudioClip hurtSound;
+
+    public RectTransform healthBarFront;
+
+    private PlayerState playerState = PlayerState.Gameplay;
 
     private Entity2D entity;
     private BoxCollider2D bCollider;
@@ -30,12 +42,20 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
 
     //Input
-    bool KeyRight = false;
-    bool KeyLeft = false;
-    bool KeyJump = false;
-    bool KeyJumpHeld = false;
-    bool KeyJumpRel = false;
+    [HideInInspector]
+    public bool KeyRight = false;
+    [HideInInspector]
+    public bool KeyLeft = false;
+    [HideInInspector]
+    public bool KeyJump = false;
+    [HideInInspector]
+    public bool KeyJumpHeld = false;
+    [HideInInspector]
+    public bool KeyJumpRel = false;
+
     public ControlScheme controls;
+
+    bool initSpawn = true;
 
     //
     bool isJumping = false;
@@ -44,6 +64,11 @@ public class PlayerController : MonoBehaviour
 
     private bool recentlyHurt = false;
     private int hurtTimer = 0;
+    private float deadTimer = 0;
+
+    private int maxHealth = 3;
+    private int currentHealth = 3;
+    public  int CurrentHealth { get { return currentHealth; } }
 
     //Game Feel Things
     private int coyoteTimer = 0;            //Allows a few frames after the leaves the ground to jump
@@ -51,6 +76,46 @@ public class PlayerController : MonoBehaviour
     private int jumpBufferTimer = 0;
     private int jumpBufferThreshhold = 6;   //Allows a few frames before landing to que up a jump on land
     private float halfGravBuffer = 0.5f;
+
+    private void Awake()
+    {
+        if (initSpawn)
+        {
+            if (GameObject.FindGameObjectsWithTag("Player").Length > 1)
+            {
+                //Keeps players variables persistant between rooms
+                foreach (GameObject oldPlayer in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    if (oldPlayer != this.gameObject)
+                    {
+                        gameObject.transform.localScale = oldPlayer.transform.localScale;
+                        gameObject.transform.position = oldPlayer.transform.position;
+
+                        PlayerController oldCont = oldPlayer.GetComponent<PlayerController>();
+
+                        KeyRight = oldCont.KeyRight;
+                        KeyLeft = oldCont.KeyLeft;
+                        KeyJump = oldCont.KeyJump;
+                        KeyJumpHeld = oldCont.KeyJumpHeld;
+                        KeyJumpRel = oldCont.KeyJumpRel;
+
+                        currentHealth = oldCont.CurrentHealth;
+                        RefeshHealhBar();
+
+                        Destroy(oldPlayer);
+                        break;
+                    }
+                }
+            }
+
+            DontDestroyOnLoad(gameObject);
+            initSpawn = false;
+        }
+        else
+        {
+            return;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -66,13 +131,13 @@ public class PlayerController : MonoBehaviour
         //Setup Input
         controls = new ControlScheme();
         controls.InGame.Enable();
-        controls.InGame.Right.started += Right_started;
-        controls.InGame.Right.canceled += Right_canceled;
-        controls.InGame.Left.started += Left_started;
-        controls.InGame.Left.canceled += Left_canceled;
+        controls.InGame.Right.started   += Right_started;
+        controls.InGame.Right.canceled  += Right_canceled;
+        controls.InGame.Left.started    += Left_started;
+        controls.InGame.Left.canceled   += Left_canceled;
 
-        controls.InGame.Jump.started += Jump_started;
-        controls.InGame.Jump.canceled += Jump_canceled;
+        controls.InGame.Jump.started    += Jump_started;
+        controls.InGame.Jump.canceled   += Jump_canceled;
 
         controls.InGame.Respawn.started += Respawn_started;
 
@@ -159,18 +224,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RefillHealth()
+    {
+        currentHealth = maxHealth;
+        RefeshHealhBar();
+    }
+
+    public void RefeshHealhBar()
+    {
+        healthBarFront.localScale = new Vector3((float)currentHealth / (float)maxHealth, healthBarFront.localScale.y, healthBarFront.localScale.z);
+    }
+
     public void Hurt()
     {
         if(!recentlyHurt)
         {
+            currentHealth -= 1;
+            RefeshHealhBar();
+            currentHealth = Mathf.Clamp(currentHealth,0,maxHealth);
+
+            if(currentHealth <= 0)
+            {
+                Instantiate(playerDeathParticles, transform);
+                playerState = PlayerState.Dead;
+            }
+
             audioSource.PlayOneShot(hurtSound);
             recentlyHurt = true;
             hurtTimer = 90;
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
+    {
+        switch(playerState)
+        {
+            case PlayerState.Gameplay:
+            {
+                GameplayState();
+            break;
+            }
+            
+            case PlayerState.Dead:
+            {
+                DeadState();
+            break;
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void GameplayState()
     {
         float fricc = groundFriction;
         if (!entity.onGround) fricc = airFirction;
@@ -328,6 +432,20 @@ public class PlayerController : MonoBehaviour
         //These should only be active one frame
         KeyJump = false;
         KeyJumpRel = false;
+    }
+
+    void DeadState()
+    {
+        entity.Velocity = new Vector2(entity.Velocity.x, entity.Velocity.y - 0.2f);
+        entity.Velocity = new Vector2(Numbers.Approach(entity.Velocity.x, 0.0f, groundFriction), entity.Velocity.y);
+
+        deadTimer += Time.fixedDeltaTime;
+
+        if(deadTimer >= 2.0f)
+        {
+            deadTimer = -10000.0f;
+            Respawn();
+        }
     }
 
     public void Jump()
