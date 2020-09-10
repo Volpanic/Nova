@@ -149,6 +149,8 @@ public class PlayerController : MonoBehaviour
         {
             GameObject obj = Instantiate(transitionMakerObject,Vector3.zero,Quaternion.identity);
             SceneTransitionMaker maker = obj.GetComponent<SceneTransitionMaker>();
+
+            if (maker == null) return;
             maker.DoTransitionMovePlayer(load,sceneName, targetPos);
         }
         else

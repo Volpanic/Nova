@@ -23,10 +23,20 @@ public class MulticontrolSetupMenu : MonoBehaviour
         controls.Menus.Down.performed += Down_performed;
         controls.Menus.Select.performed += Select_performed;
         
-
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
         Rehighlight();
+    }
+
+    public void MouseOverButton(Button button)
+    {
+        int pos = MenuItems.IndexOf(button);
+
+        if(pos != -1)
+        {
+            selectedItem = pos;
+            Rehighlight();
+        }
     }
 
     private void Select_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -69,8 +79,6 @@ public class MulticontrolSetupMenu : MonoBehaviour
                 
             }
         }
-
-        Debug.Log("Selected Menu Item: " + selectedItem.ToString());
     }
 
     private void OnDisable()

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 17729054}
   - component: {fileID: 17729055}
   - component: {fileID: 17729053}
+  - component: {fileID: 17729056}
   m_Layer: 5
   m_Name: NewGame
   m_TagString: Untagged
@@ -242,9 +243,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1205968446}
-        m_MethodName: DoTransition
-        m_Mode: 5
+      - m_Target: {fileID: 1897782408}
+        m_MethodName: NewGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -253,6 +254,34 @@ MonoBehaviour:
           m_StringArgument: scn_volcano1
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &17729056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17729051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1897782407}
+          m_MethodName: MouseOverButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 17729055}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &124339138
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +294,7 @@ GameObject:
   - component: {fileID: 124339142}
   - component: {fileID: 124339141}
   - component: {fileID: 124339140}
+  - component: {fileID: 124339143}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -365,7 +395,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 124339140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897782408}
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &124339142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -374,6 +415,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124339138}
   m_CullTransparentMesh: 0
+--- !u!114 &124339143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124339138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1897782407}
+          m_MethodName: MouseOverButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 124339141}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &807121159
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,6 +976,7 @@ GameObject:
   - component: {fileID: 1897782404}
   - component: {fileID: 1897782403}
   - component: {fileID: 1897782407}
+  - component: {fileID: 1897782408}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -1013,6 +1083,19 @@ MonoBehaviour:
   - {fileID: 17729055}
   - {fileID: 1975570269}
   - {fileID: 124339141}
+--- !u!114 &1897782408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897782402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c1ea2ab78dd5d439b60a1d63dece59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 1205968446}
 --- !u!1 &1975570266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1108,7 @@ GameObject:
   - component: {fileID: 1975570270}
   - component: {fileID: 1975570269}
   - component: {fileID: 1975570268}
+  - component: {fileID: 1975570271}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1125,7 +1209,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1975570268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897782408}
+        m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1975570270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1134,6 +1229,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975570266}
   m_CullTransparentMesh: 0
+--- !u!114 &1975570271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975570266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1897782407}
+          m_MethodName: MouseOverButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1975570269}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2015710943930269143
 PrefabInstance:
   m_ObjectHideFlags: 0

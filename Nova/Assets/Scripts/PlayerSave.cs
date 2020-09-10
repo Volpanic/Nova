@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public static class SaveGame
 {
     public const string fileName = "save.sav";
+
     public static void Save(GameSaveData saveToSave)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -33,7 +34,6 @@ public static class SaveGame
             stream.Close();
 
             return save;
-
         }
         else
         {

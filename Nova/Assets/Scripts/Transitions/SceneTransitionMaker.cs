@@ -18,6 +18,7 @@ public class SceneTransitionMaker : MonoBehaviour
 
     public void DoTransition(string roomName)
     {
+        if (sceneTransitionCanvas == null) return;
         GameObject canvas = GameObject.Instantiate(sceneTransitionCanvas,Vector3.zero,Quaternion.identity);
         canvas.GetComponentInChildren<SceneTransition>().sceneToGoTo = roomName;
         canvas.GetComponentInChildren<SceneTransition>().BeginTransition();
