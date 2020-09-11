@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used to play a certain sound in a animation or other unity event.
+/// </summary>
 public class PlaySoundAnimation : MonoBehaviour
 {
     private AudioSource audioSource;

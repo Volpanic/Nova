@@ -17,14 +17,18 @@ public class EntityFollowAlongPath : MonoBehaviour
     Entity2D entitiy = null;
     MoveingSolid movingSolid = null;
 
+    [Tooltip("If the entity should rotate there Z to face where they are moving")]
     public bool rotateWith = false;
+    [Tooltip("What to do at the end of a path.")]
     public PathType pathType = PathType.Closed;
 
-    
+    [Tooltip("Position of each node path")]
     public List<Vector2> pointPositions;
 
     int listIndex = 0;
     int listDir = 1;
+
+    [Tooltip("How fast to move along path")]
     public float speed = 1;
 
     

@@ -6,7 +6,10 @@ using UnityEngine.Events;
 
 public class HurtPlayerOnTouch : MonoBehaviour
 {
+    [Tooltip("An event to play after the player is hit")]
     public UnityEvent hurtPlayerEvent = new UnityEvent();
+
+    [Tooltip("What collider should interact with the player")]
     public Collider2D hurtCollider;
 
     public LayerMask entityLayer;

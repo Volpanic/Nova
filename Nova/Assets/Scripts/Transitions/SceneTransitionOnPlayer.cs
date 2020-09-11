@@ -22,6 +22,10 @@ public class SceneTransitionOnPlayer : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Goes to another scene when collided with.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!activated && collision.gameObject.tag == "Player")

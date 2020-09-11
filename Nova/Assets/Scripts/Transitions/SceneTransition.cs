@@ -18,7 +18,9 @@ public class SceneTransition : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+   /// <summary>
+   /// Sets the transition to not be destroyed on scene change
+   /// </summary>
     public void BeginTransition()
     {
         if(!isTran)
@@ -29,11 +31,18 @@ public class SceneTransition : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used by a unityEvent
+    /// </summary>
     public void GoToScene()
     {
         SceneManager.LoadScene(sceneToGoTo);
     }
 
+
+    /// <summary>
+    /// Destroys itself.
+    /// </summary>
     public void EndTransition()
     {
         GetComponentInParent<CanvasRenderer>().Clear();

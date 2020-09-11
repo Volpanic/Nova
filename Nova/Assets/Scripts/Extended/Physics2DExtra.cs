@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// A class adding in some extra collision detection stuff.
+    /// </summary>
     public static class Physics2DExtra
     {
         public const float PIXEL_SIZE = 16.0f;

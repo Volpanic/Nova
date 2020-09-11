@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MulticontrolSetupMenu : MonoBehaviour
 {
+    [Tooltip("A list of button components in top-first vertical order.")]
     public List<Button> MenuItems = new List<Button>();
 
     private EventSystem eventSystem;
@@ -28,6 +29,10 @@ public class MulticontrolSetupMenu : MonoBehaviour
         Rehighlight();
     }
 
+    /// <summary>
+    /// Used in button event triggers, properly highlights moused over buttons
+    /// </summary>
+    /// <param name="button"></param>
     public void MouseOverButton(Button button)
     {
         int pos = MenuItems.IndexOf(button);
@@ -39,23 +44,30 @@ public class MulticontrolSetupMenu : MonoBehaviour
         }
     }
 
+    // Invokes button action
     private void Select_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         MenuItems[selectedItem].onClick.Invoke();
     }
 
+    //Moves menu
     private void Down_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         selectedItem++;
         Rehighlight();
     }
 
+
+    //Moves menu
     private void Up_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         selectedItem--;
         Rehighlight();
     }
 
+    /// <summary>
+    /// Clamps selected item so it's not out of index, Highlights the selected
+    /// </summary>
     private void Rehighlight()
     {
         if(selectedItem < 0)
@@ -73,10 +85,6 @@ public class MulticontrolSetupMenu : MonoBehaviour
             if(selectedItem == i) // Highlight the newly selected item
             {
                 MenuItems[i].Select();
-            }
-            else // Unhighlight the others.
-            {
-                
             }
         }
     }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
+	/// <summary>
+	/// A class that adds aditinal math functions.
+	/// </summary>
     public static class Numbers
     {
 		public static float Approach(float value, float target, float amount)

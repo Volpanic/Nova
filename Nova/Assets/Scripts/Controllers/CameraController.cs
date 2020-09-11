@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     private Camera mainCam;
     private PixelPerfectCamera pixelCam;
 
+    [Tooltip("The tilemap that binds the cameras bounds.")]
     public TilemapRenderer tmr;
 
     private Vector2 screenHalf = Vector2.zero;
@@ -42,7 +43,9 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(toFollow.transform.position.x, toFollow.transform.position.y,transform.position.z);
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Move camera to target, clamps target in tilemap
+    /// </summary>
     void FixedUpdate()
     {
         Vector3 target = transform.position;

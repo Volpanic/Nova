@@ -27,6 +27,7 @@ public class Entity2D : MonoBehaviour
     public bool landed = false;
 
     public LayerMask groundLayer;
+    [Tooltip("If the object can move through colliders or not.")]
     public bool doCollisions = true;
 
     // Start is called before the first frame update
@@ -88,12 +89,20 @@ public class Entity2D : MonoBehaviour
         return Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, -1 * Physics2DExtra.PIXEL_UNIT), groundLayer);
     }
 
+    /// <summary>
+    /// Returns if a entity is ontop of a collider
+    /// </summary>
+    /// <param name="collider"></param>
+    /// <returns></returns>
     public bool IsRiding(ref Collider2D collider)
     {
         return Physics2DExtra.PlaceMeeting(bCollider, new Vector2(0, -1 * Physics2DExtra.PIXEL_UNIT), groundLayer, collider);
     }
 
-
+    /// <summary>
+    /// Moves the player by amount in the x direction, checks collisions
+    /// </summary>
+    /// <param name="amount"></param>
     public void MoveX(float amount) // IN UNITS
     {
         subPixelVelocity.x += amount;
@@ -123,6 +132,10 @@ public class Entity2D : MonoBehaviour
         Physics2D.SyncTransforms();
     }
 
+    /// <summary>
+    /// Same as moveX but in y position
+    /// </summary>
+    /// <param name="amount"></param>
     public void MoveY(float amount) // IN UNITS, NOT GOING TO CONFUSE ME AT ALL I SWEAR
     {
         subPixelVelocity.y += amount;
@@ -150,45 +163,5 @@ public class Entity2D : MonoBehaviour
             }
         }
         Physics2D.SyncTransforms();
-    }
-
-    public void Collision()
-    {
-        if(!doCollisions)
-        {
-            transform.position += (Vector3)velocity;
-            return;
-        }
-
-        //X Collision
-        if(velocity.x != 0 && Physics2DExtra.PlaceMeeting(ref bCollider,new Vector2(velocity.x,0),groundLayer))
-        {
-            //Multiplication because sign only works with ints(Unity units aren't pixels)
-            float sign = Mathf.Sign(velocity.x * PIXEL_SIZE) / PIXEL_SIZE;
-            while (sign != 0 && !Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(sign, 0), groundLayer))
-            {
-                transform.position += new Vector3(sign, 0, 0);
-
-                sign = Mathf.Sign(velocity.x * PIXEL_SIZE) / PIXEL_SIZE;
-            }
-            velocity.x = 0;  
-        }
-        transform.position += new Vector3(velocity.x,0,0);
-        
-        //Y Collision
-        if(velocity.y != 0 && Physics2DExtra.PlaceMeeting(ref bCollider,new Vector2(0, velocity.y),groundLayer))
-        {
-            //Multiplication because sign only works with ints(Unity units aren't pixels)
-            float sign = Mathf.Sign(velocity.y * PIXEL_SIZE) / PIXEL_SIZE;
-            while (sign != 0 && !Physics2DExtra.PlaceMeeting(ref bCollider, new Vector2(0, sign), groundLayer))
-            {
-                transform.position += new Vector3(0, sign, 0);
-
-                sign = Mathf.Sign(velocity.y * PIXEL_SIZE) / PIXEL_SIZE;
-            }
-            velocity.y = 0;
-            
-        }
-        transform.position += new Vector3(0, velocity.y, 0);
     }
 }

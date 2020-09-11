@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Returns the players entitiy
     public Entity2D GetEntity()
     {
         return entity;
@@ -203,6 +204,9 @@ public class PlayerController : MonoBehaviour
     public void Left_started() { KeyLeft = true;}
     public void Left_canceled() { KeyLeft = false;}
 
+    /// <summary>
+    /// Respawns the player at there last checkpoint
+    /// </summary>
     public void Respawn()
     {
         var load = SaveGame.LoadGame();
@@ -219,6 +223,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Goes to a scene and then places the player in the intended place
+    /// </summary>
+    /// <param name="targetPos"></param>
+    /// <param name="sceneName"></param>
     public void GoToScene(Vector2 targetPos, string sceneName)
     {
         var load = SaveGame.LoadGame();
@@ -237,17 +246,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets player health back to 3
+    /// </summary>
     public void RefillHealth()
     {
         currentHealth = maxHealth;
         RefeshHealhBar();
     }
 
+    /// <summary>
+    /// Updates the scale of the health bar sprite
+    /// </summary>
     public void RefeshHealhBar()
     {
         healthBarFront.localScale = new Vector3((float)currentHealth / (float)maxHealth, healthBarFront.localScale.y, healthBarFront.localScale.z);
     }
 
+
+    /// <summary>
+    /// Hurts the player, checks for death
+    /// </summary>
     public void Hurt()
     {
         if(!recentlyHurt)
@@ -287,7 +306,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Movement code, jumping, gravity,
+    /// </summary>
     void GameplayState()
     {
         float fricc = groundFriction;
@@ -448,6 +469,9 @@ public class PlayerController : MonoBehaviour
         KeyJumpRel = false;
     }
 
+    /// <summary>
+    /// Applies friction and gravity without player input
+    /// </summary>
     void DeadState()
     {
         entity.Velocity = new Vector2(entity.Velocity.x, entity.Velocity.y - 0.2f);
@@ -462,6 +486,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Causes the player to jump and set some helper bools
+    /// </summary>
     public void Jump()
     {
         entity.Velocity = new Vector2(entity.Velocity.x, JumpSpeed);
@@ -487,12 +514,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Causes the player to do a high jump
+    /// </summary>
+    /// <param name="jumpForce"></param>
     public void BurnJump(float jumpForce)
     {
         doFireJump = true;
         fireJumpAmount = jumpForce;
     }
 
+    /// <summary>
+    /// handels the players animation
+    /// </summary>
     public void Animation()
     {
         if (entity.Velocity.x != 0)

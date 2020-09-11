@@ -31,6 +31,9 @@ public class MoveingSolid : MonoBehaviour
         Move(velocity.x,velocity.y);
     }
 
+    /// <summary>
+    /// Shows the cornors of the platform
+    /// </summary>
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -46,6 +49,11 @@ public class MoveingSolid : MonoBehaviour
         Gizmos2D.DrawCircle(new Vector2(Physics2DExtra.Right(gCollider), Physics2DExtra.Bottom(gCollider)), 0.1f);
     }
 
+    /// <summary>
+    /// Moves the platform, pushes entities
+    /// </summary>
+    /// <param name="xAmount"></param>
+    /// <param name="yAmount"></param>
     private void Move(float xAmount, float yAmount)
     {
         subPixelVelocity.x += xAmount;
@@ -142,6 +150,10 @@ public class MoveingSolid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Return all entities on top of the platform.
+    /// </summary>
+    /// <returns></returns>
     private List<Entity2D> GetAllRidingEntities()
     {
         Entity2D[] a = FindObjectsOfType<Entity2D>();

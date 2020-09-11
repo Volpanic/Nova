@@ -31,7 +31,9 @@ public class AudioSourceFadeIn : MonoBehaviour
         fadeIn = false;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Fades in audio
+    /// </summary>
     void Update()
     {
         if (fadeIn)

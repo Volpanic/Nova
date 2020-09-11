@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// A class thats adds some extra gizmo features spacifically for 2D.
+    /// </summary>
     public static class Gizmos2D
     {
         public static Color color { set { Gizmos.color = value; }}

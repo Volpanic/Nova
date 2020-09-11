@@ -7,6 +7,9 @@ public class MainMenuActions : MonoBehaviour
 {
     public SceneTransitionMaker transition;
 
+    /// <summary>
+    /// Goes to the first scene
+    /// </summary>
     public void NewGame()
     {
         if (transition == null) return;
@@ -14,6 +17,9 @@ public class MainMenuActions : MonoBehaviour
         transition.DoTransition("scn_volcano1");
     }
     
+    /// <summary>
+    /// goes to the tutorial scene, unless on mobile or console
+    /// </summary>
     public void ToTutorial()
     {
         if (transition == null) return;
@@ -29,6 +35,9 @@ public class MainMenuActions : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Load the save, if there is a save to load that is.
+    /// </summary>
     public void Continue()
     {
         if (transition == null) return;
@@ -50,6 +59,9 @@ public class MainMenuActions : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// closes the game.
+    /// </summary>
     public void Exit()
     {
         if (transition == null) return;

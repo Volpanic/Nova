@@ -8,13 +8,17 @@ public class EntityRotateAround : MonoBehaviour
     Entity2D entitiy = null;
     MoveingSolid movingSolid = null;
 
+    [Tooltip("The size of the circle to rotate around")]
     public float Radius = 1;
+    [Tooltip("How fast to move")]
     public float Speed = 1;
+    [Tooltip("How many points in the circle represented by.")]
     public int Percision = 8;
     public bool rotateWith = false;
 
     private List<Vector2> pointPositions = new List<Vector2>();
     private Vector3 initPos;
+    [Tooltip("Starting point of the entity.")]
     public int listIndex = 0;
 
     // Start is called before the first frame update
@@ -51,6 +55,9 @@ public class EntityRotateAround : MonoBehaviour
         Speed = Speed * Physics2DExtra.PIXEL_UNIT;
     }
 
+    /// <summary>
+    /// Vizualizes the circle in editor.
+    /// </summary>
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)

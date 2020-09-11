@@ -22,6 +22,9 @@ public class WaterDropletSpawner : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Played in an animation.
+    /// </summary>
     public void SpawnDroplet()
     {
         Instantiate(waterDroplet,transform);

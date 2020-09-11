@@ -29,6 +29,10 @@ public class SavePoint : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deactivates all other fires, saves the game.
+    /// </summary>
+    /// <param name="player"></param>
     public void StartFire(GameObject player)
     {
         if (!activated)
