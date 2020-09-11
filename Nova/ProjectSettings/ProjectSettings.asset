@@ -686,11 +686,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template_Lightweight
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 00a51fc2eea6d701
   metroApplicationDescription: Template_Lightweight
   wsaImages: {}
   metroTileShortName: 
