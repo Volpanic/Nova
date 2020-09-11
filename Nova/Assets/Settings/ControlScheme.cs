@@ -20,7 +20,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Right"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""9ecf0b42-3994-45b5-bb67-50bedf034b4d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -28,7 +28,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Left"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""67ad1edc-2be0-46b3-b43d-9ced91d552bc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -36,7 +36,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""a41bc767-399f-470d-8bd2-c57c5f2ac714"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -44,7 +44,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Respawn"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""8790cdb9-bd27-4265-8400-5c5e510e93d6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

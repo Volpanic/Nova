@@ -14,6 +14,147 @@ TextureImporter:
   - first:
       213: -8315122239916982998
     second: spr_player_dead_3
+  - first:
+      213: -3267123161106135619
+    second: spr_player_dead_0
+  - first:
+      213: 8284135629574233223
+    second: spr_player_dead_1
+  - first:
+      213: -2797895734928963308
+    second: spr_player_dead_2
+  - first:
+      213: -2130941651170363378
+    second: spr_player_dead_3
+  - first:
+      213: 5221195776544845013
+    second: spr_player_dead_4
+  - first:
+      213: -8449141260093414576
+    second: spr_player_dead_5
+  - first:
+      213: -3718476159152368378
+    second: spr_player_dead_6
+  - first:
+      213: -8611955529489029086
+    second: spr_player_dead_7
+  - first:
+      213: -2786207169202175069
+    second: spr_player_dead_8
+  - first:
+      213: 1151935632463407264
+    second: spr_player_dead_9
+  - first:
+      213: -1897286116006706910
+    second: spr_player_dead_10
+  - first:
+      213: -3945533632555995402
+    second: spr_player_dead_11
+  - first:
+      213: 1935146405428263876
+    second: spr_player_dead_12
+  - first:
+      213: 4867814705109380993
+    second: spr_player_dead_13
+  - first:
+      213: -5877642726305943814
+    second: spr_player_dead_14
+  - first:
+      213: 4385640216528012194
+    second: spr_player_dead_15
+  - first:
+      213: -1640767387620643646
+    second: spr_player_dead_16
+  - first:
+      213: -6202516515441973198
+    second: spr_player_dead_17
+  - first:
+      213: 1352135738369568726
+    second: spr_player_dead_18
+  - first:
+      213: 570430268913848989
+    second: spr_player_dead_19
+  - first:
+      213: 8970234076652278709
+    second: spr_player_dead_20
+  - first:
+      213: 7190014740187210353
+    second: spr_player_dead_21
+  - first:
+      213: 9094538220441935436
+    second: spr_player_dead_22
+  - first:
+      213: -5592128151456262456
+    second: spr_player_dead_23
+  - first:
+      213: -1327718186528522313
+    second: spr_player_dead_24
+  - first:
+      213: -6529523535189028627
+    second: spr_player_dead_25
+  - first:
+      213: 682281576844509192
+    second: spr_player_dead_26
+  - first:
+      213: 3548682853265010398
+    second: spr_player_dead_27
+  - first:
+      213: -4670390792761776589
+    second: spr_player_dead_28
+  - first:
+      213: -4389390037202578450
+    second: spr_player_dead_29
+  - first:
+      213: 5675321893404424354
+    second: spr_player_dead_30
+  - first:
+      213: -178591447595021755
+    second: spr_player_dead_31
+  - first:
+      213: 2374168639664238599
+    second: spr_player_dead_32
+  - first:
+      213: 5686489938204402204
+    second: spr_player_dead_33
+  - first:
+      213: -8583474958179537774
+    second: spr_player_dead_34
+  - first:
+      213: -3096996462939850090
+    second: spr_player_dead_35
+  - first:
+      213: 6675406764075422802
+    second: spr_player_dead_36
+  - first:
+      213: -8450295894400805565
+    second: spr_player_dead_37
+  - first:
+      213: 1110039490827581439
+    second: spr_player_dead_38
+  - first:
+      213: 3443862437768886818
+    second: spr_player_dead_39
+  - first:
+      213: -1975426748041291767
+    second: spr_player_dead_40
+  - first:
+      213: -7759309633053391273
+    second: spr_player_dead_41
+  - first:
+      213: -3025354554943530936
+    second: spr_player_dead_42
+  - first:
+      213: 4985329866181170336
+    second: spr_player_dead_43
+  - first:
+      213: 2130686218487479095
+    second: spr_player_dead_44
+  - first:
+      213: 1194205299913781334
+    second: spr_player_dead_45
+  - first:
+      213: -6219613985883836307
+    second: spr_player_dead_46
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -154,15 +295,15 @@ TextureImporter:
         y: 0
         width: 24
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7b173f1bef47e4a0800000000000000
-      internalID: -6564190060609594501
+      spriteID: db541d08bc8d8a2d0800000000000000
+      internalID: -3267123161106135619
       vertices: []
       indices: 
       edges: []
@@ -175,15 +316,15 @@ TextureImporter:
         y: 0
         width: 24
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb901c4fc73eb22b0800000000000000
-      internalID: -5608138785138079300
+      spriteID: 78cddefb67927f270800000000000000
+      internalID: 8284135629574233223
       vertices: []
       indices: 
       edges: []
@@ -196,15 +337,15 @@ TextureImporter:
         y: 0
         width: 24
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69b3a56209ecc0d60800000000000000
-      internalID: 7857882568368733078
+      spriteID: 4198af827a0eb29d0800000000000000
+      internalID: -2797895734928963308
       vertices: []
       indices: 
       edges: []
@@ -217,15 +358,15 @@ TextureImporter:
         y: 0
         width: 24
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2d3cc1d060ca9c80800000000000000
-      internalID: -8315122239916982998
+      spriteID: e08f7e4cbdf5d62e0800000000000000
+      internalID: -2130941651170363378
       vertices: []
       indices: 
       edges: []

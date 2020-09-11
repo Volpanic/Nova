@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -264,6 +265,22 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    void RefreshInput()
+    {
+        if (controls.InGame.Right.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyRight = true;
+        else KeyRight = false;
+        
+        if (controls.InGame.Left.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyLeft = true;
+        else KeyLeft = false;
+        
+        if (controls.InGame.Jump.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyJumpHeld = true;
+        else
+        {
+            Jump_canceled();
+            KeyJumpHeld = false;
+        }
+    }
+
     /// <summary>
     /// Hurts the player, checks for death
     /// </summary>
@@ -290,6 +307,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        RefreshInput();
         switch(playerState)
         {
             case PlayerState.Gameplay:
