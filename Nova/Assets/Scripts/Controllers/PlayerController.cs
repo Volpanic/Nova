@@ -118,6 +118,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public Entity2D GetEntity()
+    {
+        return entity;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -255,6 +260,7 @@ public class PlayerController : MonoBehaviour
             {
                 Instantiate(playerDeathParticles, transform);
                 playerState = PlayerState.Dead;
+                animator.Play("ani_player_dead");
             }
 
             audioSource.PlayOneShot(hurtSound);

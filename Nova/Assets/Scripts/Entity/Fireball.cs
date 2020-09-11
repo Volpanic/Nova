@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -6,6 +7,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Fireball : MonoBehaviour
 {
     Entity2D entity;
+    Collider2D eCollider;
     PlayerController playerEntity = null;
 
     public Vector2 dirVec = Vector2.right;
@@ -19,6 +21,7 @@ public class Fireball : MonoBehaviour
     {
         entity = GetComponent<Entity2D>();
         audioSource = GetComponentInParent<AudioSource>();
+        eCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
