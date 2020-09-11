@@ -1,5 +1,7 @@
 # NOVA
 
+[Play Online Here.](https://volpanic.github.io/Nova/)
+
 NOVA is a 2D side scrolling pixel art platformer made in Unity. This project was created for my Cross-Platform Development Assessment.
 
 ## Purpose 
