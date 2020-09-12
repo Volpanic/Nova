@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/scn_volcano2.unity
     guid: f7df163d7a63dd64886f10080fcd0c3b
+  - enabled: 1
+    path: Assets/Scenes/scn_volcano3.unity
+    guid: 642878ffb32d84143ad2c9d286405186
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 07fe00ec2a19317409bd802d4e47a760,
       type: 2}
