@@ -18,6 +18,7 @@ public class RisingWater : MonoBehaviour
     void FixedUpdate()
     {
         transform.position += new Vector3(0, risingSpeed, 0);
+        risingSpeed += 0.000001f;
 
         if (player != null)
         {

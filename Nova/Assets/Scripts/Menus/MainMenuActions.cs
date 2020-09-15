@@ -7,6 +7,16 @@ public class MainMenuActions : MonoBehaviour
 {
     public SceneTransitionMaker transition;
 
+    public void Awake()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach(GameObject player in players)
+        {
+            Destroy(player);
+        }
+    }
+
     /// <summary>
     /// Goes to the first scene
     /// </summary>
@@ -16,7 +26,14 @@ public class MainMenuActions : MonoBehaviour
 
         transition.DoTransition("scn_volcano1");
     }
-    
+
+    public void MainMenu()
+    {
+        if (transition == null) return;
+
+        transition.DoTransition("MainMenu");
+    }
+
     /// <summary>
     /// goes to the tutorial scene, unless on mobile or console
     /// </summary>
