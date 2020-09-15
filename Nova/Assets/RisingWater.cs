@@ -6,12 +6,15 @@ using UnityEngine;
 public class RisingWater : MonoBehaviour
 {
     private PlayerController player = null;
+    public GameObject waterStretchObject;
+    public float initYPos = 0;
     float risingSpeed = 0.02f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        initYPos = transform.position.y;
+        waterStretchObject.transform.position = transform.position;
     }
 
     // Update is called once per frame
@@ -34,6 +37,9 @@ public class RisingWater : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         }
-        
+
+        waterStretchObject.transform.localScale = new Vector3(waterStretchObject.transform.localScale.x,
+            (transform.position.y - initYPos) * 16,
+            waterStretchObject.transform.localScale.z);
     }
 }
