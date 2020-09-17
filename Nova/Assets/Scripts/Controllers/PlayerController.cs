@@ -267,17 +267,20 @@ public class PlayerController : MonoBehaviour
 
     void RefreshInput()
     {
-        if (controls.InGame.Right.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyRight = true;
-        else KeyRight = false;
-        
-        if (controls.InGame.Left.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyLeft = true;
-        else KeyLeft = false;
-        
-        if (controls.InGame.Jump.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyJumpHeld = true;
-        else
+        if (!Application.isMobilePlatform)
         {
-            Jump_canceled();
-            KeyJumpHeld = false;
+            if (controls.InGame.Right.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyRight = true;
+            else KeyRight = false;
+
+            if (controls.InGame.Left.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyLeft = true;
+            else KeyLeft = false;
+
+            if (controls.InGame.Jump.ReadValue<float>() >= InputSystem.settings.defaultButtonPressPoint) KeyJumpHeld = true;
+            else
+            {
+                Jump_canceled();
+                KeyJumpHeld = false;
+            }
         }
     }
 

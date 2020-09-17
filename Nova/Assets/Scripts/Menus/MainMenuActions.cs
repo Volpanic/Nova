@@ -75,7 +75,7 @@ public class MainMenuActions : MonoBehaviour
             Debug.Log(Path.Combine(Application.persistentDataPath, SaveGame.fileName));
         }
     }
-    
+
     /// <summary>
     /// closes the game.
     /// </summary>
@@ -83,6 +83,9 @@ public class MainMenuActions : MonoBehaviour
     {
         if (transition == null) return;
 
-        Application.Quit();
+        if (!Application.isMobilePlatform && Application.platform != RuntimePlatform.WebGLPlayer)
+        { 
+            Application.Quit();
+        }
     }
 }

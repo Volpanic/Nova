@@ -21,7 +21,7 @@ public class RisingWater : MonoBehaviour
     void FixedUpdate()
     {
         transform.position += new Vector3(0, risingSpeed, 0);
-        risingSpeed += 0.000002f;
+        
 
         if (player != null)
         {
@@ -39,7 +39,9 @@ public class RisingWater : MonoBehaviour
         }
 
         waterStretchObject.transform.localScale = new Vector3(waterStretchObject.transform.localScale.x,
-            (transform.position.y - initYPos) * 16,
+            (((transform.position.y + risingSpeed) - (Physics2DExtra.PIXEL_UNIT * (Physics2DExtra.PIXEL_SIZE/2))) - initYPos) * 16,
             waterStretchObject.transform.localScale.z);
+
+        risingSpeed += 0.000002f;
     }
 }
