@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,29 +49,30 @@ public class CameraController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        SmoothMoveCameraToTarget();
+    }
+
+    private void SmoothMoveCameraToTarget()
+    {
+        //Get target
         Vector3 target = transform.position;
-        
-        if (hasRigidBody)
-        {
-            target = new Vector3(toFollow.transform.position.x,
-                toFollow.transform.position.y,
-                transform.position.z);
-        }
-        else
+        if (toFollow != null)
         {
             target = new Vector3(toFollow.transform.position.x,
                 toFollow.transform.position.y,
                 transform.position.z);
         }
 
-        transform.position = new Vector3(Mathf.Lerp(transform.position.x,target.x,0.32f),
+        //Lerp between the cameras pos and the targets
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, target.x, 0.32f),
             Mathf.Lerp(transform.position.y, target.y, 0.16f),
             transform.position.z);
 
+        //Lock position to on tilemap bounds.
         float hWidth = mainCam.orthographicSize;
         float hHeight = mainCam.orthographicSize;
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x,tmr.bounds.min.x + screenHalf.x,tmr.bounds.max.x - screenHalf.x),
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, tmr.bounds.min.x + screenHalf.x, tmr.bounds.max.x - screenHalf.x),
             Mathf.Clamp(transform.position.y, tmr.bounds.min.y + screenHalf.y, tmr.bounds.max.y - screenHalf.y),
             transform.position.z);
     }

@@ -31,8 +31,6 @@ public class EntityFollowAlongPath : MonoBehaviour
     [Tooltip("How fast to move along path")]
     public float speed = 1;
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -92,18 +90,6 @@ public class EntityFollowAlongPath : MonoBehaviour
                 }
             }
         }
-
-        //if (dist <= speed)
-        //{
-        //    Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position);
-
-        //    entitiy.Velocity = Vector2.MoveTowards((Vector2)transform.position, pointPositions[listIndex],speed) - (Vector2)transform.position;
-        //}
-        //else
-        //{
-        //    Vector2 movement = (pointPositions[listIndex] - (Vector2)transform.position).normalized * speed;
-        //    entitiy.Velocity = movement;
-        //}
 
         if (entitiy != null)
         {

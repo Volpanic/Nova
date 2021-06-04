@@ -57,12 +57,12 @@ public class PlayerController : MonoBehaviour
 
     public ControlScheme controls;
 
-    bool initSpawn = true;
+    private bool initSpawn = true;
 
     //
-    bool isJumping = false;
-    bool doFireJump = false;
-    float fireJumpAmount = 0.0f;
+    private bool isJumping = false;
+    private bool doFireJump = false;
+    private float fireJumpAmount = 0.0f;
 
     private bool recentlyHurt = false;
     private int hurtTimer = 0;
@@ -76,11 +76,12 @@ public class PlayerController : MonoBehaviour
     private int coyoteTimer = 0;            //Allows a few frames after the leaves the ground to jump
     private int coyoteTimeThreshhold = 6;
     private int jumpBufferTimer = 0;
-    private int jumpBufferThreshhold = 6;   //Allows a few frames before landing to que up a jump on land
+    private int jumpBufferThreshhold = 6;   //Allows a few frames before landing to buffer a jump on land
     private float halfGravBuffer = 0.5f;
 
     private void Awake()
     {
+        //If inital spawn removes previous player, that was marked do not destroy before this scene
         if (initSpawn)
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length > 1)
