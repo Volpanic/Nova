@@ -11,7 +11,7 @@ public class Entity2D : MonoBehaviour
     public BoxCollider2D bCollider;
 
     [HideInInspector]
-    public Vector2 Velocity // So it's in pixels, Will definetly not end up confusing i swear
+    public Vector2 Velocity // Converts pixel space velocity into units
     {
         get {return velocity * PIXEL_SIZE;}
         set {velocity = value / PIXEL_SIZE;}
@@ -39,7 +39,12 @@ public class Entity2D : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Movement();
+        GroundCheck();
+    }
 
+    private void Movement()
+    {
         if (doCollisions)
         {
             MoveX(velocity.x);
@@ -65,7 +70,10 @@ public class Entity2D : MonoBehaviour
                 transform.position += new Vector3(0, move, 0);
             }
         }
+    }
 
+    private void GroundCheck()
+    {
         //Check if on ground
         landed = false;
         if (OnGround())
@@ -81,7 +89,6 @@ public class Entity2D : MonoBehaviour
             onGround = false;
         }
 
-        //Collision();
     }
 
     private bool OnGround()
@@ -136,7 +143,7 @@ public class Entity2D : MonoBehaviour
     /// Same as moveX but in y position
     /// </summary>
     /// <param name="amount"></param>
-    public void MoveY(float amount) // IN UNITS, NOT GOING TO CONFUSE ME AT ALL I SWEAR
+    public void MoveY(float amount) // IN UNITS
     {
         subPixelVelocity.y += amount;
         float move = Mathf.Round(subPixelVelocity.y * PIXEL_SIZE) / PIXEL_SIZE; // In Units 
